@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>許芳瑜｜履歷 — 方向 B 深色動態</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #F3EBEA;
+    --amber: #937474;
+    --teal: #B39293;
+    --tint: #D8C4C3;
+    --navy: #2E2424;
+    --navy-d: #241B1B;
+    --sans: "Noto Sans TC", sans-serif;
+    --serif: "Noto Serif TC", serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans); background: var(--navy); color: var(--cream);
+    overflow-x: hidden; -webkit-font-smoothing: antialiased; line-height: 1.6;
+  }
+  ::selection { background: var(--amber); color: var(--navy); }
+
+  .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--teal),var(--amber)); z-index: 300; }
+
+  /* top nav */
+  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 250; display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 2.6rem; mix-blend-mode: difference; }
+  .topbar .logo { font-family: var(--serif); font-weight: 900; font-size: 1.3rem; color: #fff; }
+  .topbar nav { display: flex; gap: 1.8rem; }
+  .topbar nav a { color: #fff; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.8; transition: opacity 0.3s; }
+  .topbar nav a:hover { opacity: 1; }
+  @media (max-width: 720px){ .topbar nav { display: none; } }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 2.6rem; }
+
+  /* HERO with parallax kinetic type */
+  .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+  .hero .bg-word { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: var(--serif); font-weight: 900;
+    font-size: 40vw; color: rgba(179,146,147,0.10); white-space: nowrap; pointer-events: none; z-index: 0; }
+  .hero .inner { position: relative; z-index: 2; }
+  .hero-row { display: flex; align-items: center; justify-content: space-between; gap: 4rem; width: 100%; position: relative; z-index: 2; }
+  .hero-row .inner { flex: 1; min-width: 0; }
+  .hero-card { flex: 0 0 auto; }
+  .hc-frame { position: relative; width: clamp(240px, 25vw, 340px); aspect-ratio: 3/4; border-radius: 8px;
+    background: linear-gradient(150deg, var(--teal), var(--amber)); display: flex; align-items: center; justify-content: center;
+    color: var(--navy); box-shadow: 0 35px 70px -25px rgba(0,0,0,0.55); animation: floaty 6s ease-in-out infinite; }
+  .hc-frame::before { content: ""; position: absolute; inset: -14px; border: 1px solid var(--teal); border-radius: 12px; opacity: 0.45; }
+  @keyframes floaty { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-14px); } }
+  .hc-badge { position: absolute; top: 1rem; left: 1rem; font-size: 0.7rem; letter-spacing: 0.15em; background: rgba(46,36,36,0.85); color: var(--cream); padding: 0.3rem 0.7rem; border-radius: 100px; }
+  .hc-label { font-family: var(--serif); font-size: 1.7rem; font-weight: 900; text-align: center; line-height: 1.3; }
+  .hc-label span { display: block; font-family: var(--sans); font-size: 0.8rem; font-weight: 400; opacity: 0.7; margin-top: 0.4rem; letter-spacing: 0.1em; }
+  @media (max-width: 860px){ .hero-card { display: none; } }
+  .hero .tag { display: inline-flex; align-items: center; gap: 0.7rem; font-size: 0.8rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.5rem; }
+  .hero .tag::before { content: ""; width: 36px; height: 1px; background: var(--teal); }
+  .hero h1 { font-family: var(--sans); font-weight: 900; font-size: clamp(3.5rem, 13vw, 11rem); line-height: 0.92; letter-spacing: -0.02em; }
+  .hero h1 .o { color: transparent; -webkit-text-stroke: 2px var(--amber); }
+  .hero .role { margin-top: 2rem; font-size: clamp(1.1rem,2.2vw,1.6rem); color: var(--cream); max-width: 620px; opacity: 0.85; }
+  .hero .stats { position: absolute; bottom: 3rem; left: 0; right: 0; display: flex; gap: 3rem; flex-wrap: wrap; }
+  .hero .stats div .n { font-family: var(--serif); font-size: 2.6rem; color: var(--amber); font-weight: 900; line-height: 1; }
+  .hero .stats div .l { font-size: 0.8rem; color: var(--teal); letter-spacing: 0.1em; margin-top: 0.4rem; }
+
+  .fade-up { opacity: 0; transform: translateY(50px); transition: 0.9s cubic-bezier(.16,1,.3,1); }
+  .fade-up.in { opacity: 1; transform: none; }
+  .d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}.d4{transition-delay:.48s}
+
+  .sec { padding: 9rem 0; }
+  .label { font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+  .label .idx { color: var(--amber); font-family: var(--serif); }
+  .sec h2 { font-family: var(--sans); font-weight: 900; font-size: clamp(2.4rem,6vw,4.5rem); line-height: 1; letter-spacing: -0.01em; margin-bottom: 3rem; }
+
+  /* About split */
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about .big { font-family: var(--serif); font-size: clamp(1.6rem,2.8vw,2.4rem); line-height: 1.5; font-weight: 600; }
+  .about .big b { color: var(--amber); }
+  .meta-list .mrow { display: grid; grid-template-columns: 130px 1fr; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .meta-list .mrow .k { color: var(--teal); font-size: 0.82rem; letter-spacing: 0.08em; padding-top: 3px; }
+  .meta-list .mrow .v { font-size: 1.05rem; }
+  @media (max-width: 820px){ .about { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  /* Horizontal IMAGE gallery — pinned */
+  .gal-pin { height: 320vh; position: relative; background: var(--navy-d); }
+  .gal-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+  .gal-head { padding: 0 2.6rem; margin-bottom: 2rem; }
+  .gal-track { display: flex; gap: 1.5rem; padding: 0 2.6rem; will-change: transform; }
+  .frame { flex: 0 0 clamp(280px, 30vw, 420px); }
+  .frame .ph { aspect-ratio: 4/5; border-radius: 4px; position: relative; overflow: hidden;
+    display: flex; align-items: flex-end; padding: 1.5rem; color: var(--navy); font-weight: 700;
+    background-size: cover; background-position: center; }
+  .frame .ph .badge { position: absolute; top: 1rem; left: 1rem; z-index: 2; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    background: rgba(46,36,36,0.85); color: var(--cream); padding: 0.3rem 0.7rem; border-radius: 100px; }
+  .frame .ph .ttl { position: relative; z-index: 2; font-family: var(--serif); font-size: 1.4rem; line-height: 1.2; }
+  .frame .cap { margin-top: 0.9rem; font-size: 0.85rem; color: rgba(243,235,234,0.6); }
+  /* photo frames: scrim for legibility */
+  .ph.img { color: #fff; }
+  .ph.img::after { content: ""; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to top, rgba(36,27,27,0.9), rgba(36,27,27,0.25) 55%, rgba(36,27,27,0.05)); }
+  .ph.c1 { background: linear-gradient(135deg,var(--teal),var(--amber)); }
+  .gal-note { position: absolute; bottom: 2.5rem; left: 2.6rem; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); }
+  .gal-note .ph-tag { color: var(--amber); }
+
+  /* Timeline cards (stagger) */
+  .tl { position: relative; }
+  .tl .item { display: grid; grid-template-columns: 160px 1fr; gap: 2.5rem; padding: 2.5rem 0; border-top: 1px solid rgba(255,255,255,0.12); align-items: start; }
+  .tl .item:hover .yr { color: var(--amber); }
+  .tl .item .yr { font-family: var(--serif); font-size: 1.4rem; font-weight: 900; color: var(--teal); transition: color 0.3s; }
+  .tl .item h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .tl .item .org { color: var(--teal); font-size: 0.95rem; margin-bottom: 0.8rem; }
+  .tl .item p { color: rgba(243,235,234,0.72); font-size: 0.95rem; max-width: 720px; }
+  @media (max-width: 720px){ .tl .item { grid-template-columns: 1fr; gap: 0.5rem; } }
+
+  /* Skills grid bars */
+  .skills-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2.5rem 4rem; }
+  .skill .top { display: flex; justify-content: space-between; margin-bottom: 0.6rem; }
+  .skill .top .nm { font-weight: 500; font-size: 1.05rem; }
+  .skill .top .pc { color: var(--amber); font-family: var(--serif); }
+  .skill .bar { height: 6px; background: rgba(255,255,255,0.12); border-radius: 100px; overflow: hidden; }
+  .skill .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg,var(--teal),var(--amber)); border-radius: 100px; transition: width 1.2s cubic-bezier(.16,1,.3,1); }
+  @media (max-width: 720px){ .skills-grid { grid-template-columns: 1fr; } }
+
+  /* certs chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+  .chip { padding: 0.7rem 1.3rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; font-size: 0.95rem; transition: 0.3s; cursor: default; }
+  .chip:hover { background: var(--teal); color: var(--navy); border-color: var(--teal); transform: translateY(-3px); }
+
+  /* contact */
+  .cta { text-align: center; padding: 10rem 0; }
+  .cta h2 { font-family: var(--serif); font-size: clamp(2.5rem,9vw,7rem); font-weight: 900; line-height: 1; }
+  .cta a.mail { display: inline-block; margin-top: 2.5rem; font-size: clamp(1.2rem,3vw,2rem); color: var(--amber); text-decoration: none; border-bottom: 2px solid var(--amber); padding-bottom: 0.3rem; }
+  .cta .row { margin-top: 3rem; display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; color: var(--teal); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="topbar">
+  <div class="logo">許芳瑜</div>
+  <nav>
+    <a href="#about">關於</a><a href="#gallery">歷程</a><a href="#work">經歷</a><a href="#skills">技能</a><a href="#contact">聯絡</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<header class="hero wrap">
+  <div class="bg-word" id="bgWord">ADMIN</div>
+  <div class="hero-row">
+    <div class="inner">
+      <span class="tag">行政專業 ・ 12 年資歷</span>
+      <h1>許<span class="o">芳</span>瑜</h1>
+      <p class="role">把混亂變秩序的人。從訂單、財務、出貨到籌辦年度大會 —— 行政是我的專業，細節是我的語言。</p>
+    </div>
+    <div class="hero-card" aria-label="個人照佔位">
+      <div class="hc-frame">
+        <span class="hc-badge">PHOTO</span>
+        <div class="hc-label">個人照<span>待替換</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="stats wrap" style="padding:0;">
+    <div><div class="n">12+</div><div class="l">年工作經歷</div></div>
+    <div><div class="n">10+</div><div class="l">張專業證照</div></div>
+    <div><div class="n">8</div><div class="l">人團隊管理</div></div>
+    <div><div class="n">3</div><div class="l">語言能力</div></div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section class="sec wrap" id="about">
+  <div class="label fade-up"><span class="idx">01</span> 關於我</div>
+  <div class="about">
+    <p class="big fade-up">十餘年橫跨<b>行政、門市、餐飲與會展</b>的歷練，讓我習慣在多工之間保持<b>條理</b>。我相信好的行政，是讓組織「順起來」的隱形引擎。</p>
+    <div class="meta-list fade-up d1">
+      <div class="mrow"><span class="k">現職</span><span class="v">世界華人工商婦女協會｜國際社團會務秘書</span></div>
+      <div class="mrow"><span class="k">學歷</span><span class="v">致理科技大學・企業管理（選修會議展覽）</span></div>
+      <div class="mrow"><span class="k">所在地</span><span class="v">新北市樹林區</span></div>
+      <div class="mrow"><span class="k">就業狀態</span><span class="v">在職中・錄取後一個月可上班</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HORIZONTAL IMAGE GALLERY -->
+<section id="gallery">
+  <div class="gal-pin">
+    <div class="gal-sticky">
+      <div class="gal-head wrap" style="padding-left:2.6rem;">
+        <div class="label"><span class="idx">02</span> 職涯切片</div>
+        <h2 style="margin:0;font-size:clamp(2rem,5vw,3.5rem);">橫向回顧每個身分</h2>
+      </div>
+      <div class="gal-track" id="galTrack">
+        <div class="frame"><div class="ph c1"><span class="badge">個人照</span><span class="ttl">許芳瑜<br>Fang-Yu Hsu</span></div><div class="cap">＊ 此為佔位圖，待提供照片替換</div></div>
+        <div class="frame"><div class="ph img" style="background-image:url('../public/極勁股份.png')"><span class="badge">現職</span><span class="ttl">行政人員<br>極勁股份</span></div><div class="cap">訂單・財務・採購・活動籌辦</div></div>
+        <div class="frame"><div class="ph img" style="background-image:url('../public/飯飯堂.png')"><span class="badge">創業</span><span class="ttl">飯飯堂<br>自行開店</span></div><div class="cap">從 0 到 1 的小店經營</div></div>
+        <div class="frame"><div class="ph img" style="background-image:url('../public/建築樂園.png')"><span class="badge">管理</span><span class="ttl">門市組長<br>建築樂園</span></div><div class="cap">帶領 5–8 人團隊</div></div>
+        <div class="frame"><div class="ph img" style="background-image:url('../public/實習.png')"><span class="badge">會展</span><span class="ttl">展覽實習<br>石尚・人才天下</span></div><div class="cap">會議展覽專業基礎</div></div>
+      </div>
+      <div class="gal-note">← 滑動探索 ・ SCROLL → <span class="ph-tag">／ 圖片為佔位，待替換</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK timeline -->
+<section class="sec wrap" id="work">
+  <div class="label fade-up"><span class="idx">03</span> 完整工作經歷</div>
+  <h2 class="fade-up">12 年・一段段累積</h2>
+  <div class="tl">
+    <div class="item fade-up"><div class="yr">2023→</div><div><h3>行政人員 ・ 國際社團會務秘書</h3><div class="org">極勁股份有限公司 ／ 世界華人工商婦女協會</div><p>訂單建檔、銀行收支、零用金、薪資計算、線上轉帳、保固卡製作、機器進銷存、計算獎金、客訴處理、對接分公司與廠商、採購，並籌辦年度大會、尾牙與員工旅遊。</p></div></div>
+    <div class="item fade-up"><div class="yr">2022</div><div><h3>自行開店・飯飯堂</h3><div class="org">餐飲業 ／ 新北樹林</div><p>出攤前置作業、製作飯糰、餐點介紹、盤點叫貨。</p></div></div>
+    <div class="item fade-up"><div class="yr">2020</div><div><h3>門市人員（組長）</h3><div class="org">Kid's 建築樂園 ／ 新北中和</div><p>管理 5–8 人，負責銷售、每月盤點與零用金、現場應變、客訴、報表更新、幼兒園團體方案接洽。</p></div></div>
+    <div class="item fade-up"><div class="yr">2018</div><div><h3>票務人員</h3><div class="org">力行國際 ／ 新北樹林</div><p>管理 9–12 人，負責銷售、排班、每週每月盤點、零用金計算、現場應變與客訴處理。</p></div></div>
+    <div class="item fade-up"><div class="yr">2014</div><div><h3>展場工讀・安親助教・外場吧檯</h3><div class="org">石尚企業 ／ 何嘉仁 ／ 地平線一號 等</div><p>會展工讀、教學助理與餐飲服務，奠定服務應對與會議展覽基本功。</p></div></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="sec wrap" id="skills">
+  <div class="label fade-up"><span class="idx">04</span> 核心技能</div>
+  <h2 class="fade-up">擅長的事</h2>
+  <div class="skills-grid">
+    <div class="skill fade-up"><div class="top"><span class="nm">行政事務 / 文書處理</span><span class="pc">95</span></div><div class="bar"><i data-w="95"></i></div></div>
+    <div class="skill fade-up d1"><div class="top"><span class="nm">Excel / 資料建檔</span><span class="pc">90</span></div><div class="bar"><i data-w="90"></i></div></div>
+    <div class="skill fade-up"><div class="top"><span class="nm">財務 / 收支 / 薪資</span><span class="pc">85</span></div><div class="bar"><i data-w="85"></i></div></div>
+    <div class="skill fade-up d1"><div class="top"><span class="nm">客訴處理 / 接待</span><span class="pc">88</span></div><div class="bar"><i data-w="88"></i></div></div>
+    <div class="skill fade-up"><div class="top"><span class="nm">採購 / 進銷存</span><span class="pc">82</span></div><div class="bar"><i data-w="82"></i></div></div>
+    <div class="skill fade-up d1"><div class="top"><span class="nm">活動 / 會展籌辦</span><span class="pc">80</span></div><div class="bar"><i data-w="80"></i></div></div>
+  </div>
+
+  <div style="margin-top:5rem;">
+    <div class="label fade-up"><span class="idx">05</span> 資格認證</div>
+    <div class="chips fade-up">
+      <span class="chip">會議展覽專業人員認證</span><span class="chip">EEC 企業電子化助理規劃師</span><span class="chip">TQC-DK 電子商務概論</span>
+      <span class="chip">TQC-OA 中文輸入</span><span class="chip">丙級飲料調製</span><span class="chip">丙級餐旅服務</span>
+      <span class="chip">JLPT N5</span><span class="chip">TOEIC 多益</span><span class="chip">PMA 專案助理</span><span class="chip">兩岸經貿商務人才</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="cta wrap" id="contact">
+  <div class="label fade-up" style="justify-content:center;"><span class="idx">06</span> 聯絡</div>
+  <h2 class="fade-up">Let's work<br>together.</h2>
+  <a class="mail fade-up d1" href="mailto:z0930000580@gmail.com">z0930000580@gmail.com</a>
+  <div class="row fade-up d2"><span>0930-000-580</span><span>新北市樹林區</span><span>聯絡時間 13:00–22:00</span></div>
+</section>
+
+<script>
+  const progress = document.getElementById('progress');
+  function onScroll(){
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (window.scrollY / h * 100) + '%';
+    // hero bg word parallax
+    const bw = document.getElementById('bgWord');
+    if (bw) bw.style.transform = `translate(-50%,-50%) translateX(${-window.scrollY*0.25}px)`;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        e.target.querySelectorAll && e.target.querySelectorAll('.bar i').forEach(b=>{ b.style.width = b.dataset.w + '%'; });
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.18 });
+  document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
+
+  // pinned horizontal gallery
+  const pin = document.querySelector('.gal-pin');
+  const track = document.getElementById('galTrack');
+  function horiz(){
+    const rect = pin.getBoundingClientRect();
+    const total = pin.offsetHeight - window.innerHeight;
+    const prog = Math.min(Math.max(-rect.top/total,0),1);
+    const max = track.scrollWidth - window.innerWidth + 40;
+    track.style.transform = `translateX(${-prog*max}px)`;
+  }
+  window.addEventListener('scroll', horiz, { passive: true });
+  window.addEventListener('resize', horiz);
+  horiz();
+</script>
+</body>
+</html>

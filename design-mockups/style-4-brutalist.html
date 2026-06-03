@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tsai Cheng-Hung — Brutalist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Archivo+Black&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep:#937474;--middeep:#B39293;--mid:#D8C4C3;--light:#F3EBEA;--ink:#2E2424;
+    --display:"Archivo Black",sans-serif;--sans:"Archivo",sans-serif;--mono:"DM Mono",monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--light);color:var(--ink);font-family:var(--sans);line-height:1.45;overflow-x:hidden}
+  ::selection{background:var(--ink);color:var(--light)}
+
+  header{position:fixed;inset:0 0 auto 0;z-index:100;background:var(--ink);color:var(--light);
+    border-bottom:4px solid var(--ink);transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  header.collapsed{transform:translateY(-100%)}
+  .bar{display:flex;align-items:stretch;justify-content:space-between}
+  .brand{font-family:var(--display);font-size:1rem;letter-spacing:-.02em;padding:16px 22px;display:flex;align-items:center;gap:10px}
+  .brand .sq{width:14px;height:14px;background:var(--deep)}
+  nav{display:flex;align-items:stretch}
+  nav a{font-family:var(--mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--light);text-decoration:none;padding:18px 20px;border-left:1px solid #ffffff22;display:flex;align-items:center;transition:background .2s,color .2s}
+  nav a:hover{background:var(--deep)}
+  nav a.disabled{opacity:.4;pointer-events:none}
+  .lang{font-family:var(--mono);font-size:.8rem;text-transform:uppercase;background:var(--deep);color:var(--light);border:none;padding:0 24px;cursor:pointer;border-left:1px solid #ffffff22}
+  .lang:hover{background:var(--light);color:var(--ink)}
+
+  .hero{padding:140px 22px 0;border-bottom:4px solid var(--ink)}
+  .hero .kick{font-family:var(--mono);font-size:.95rem;text-transform:uppercase;letter-spacing:.1em;color:var(--deep);margin-bottom:10px}
+  .hero h1{font-family:var(--display);font-size:clamp(3.4rem,16vw,15rem);line-height:.82;letter-spacing:-.04em;text-transform:uppercase}
+  .hero h1 .o{-webkit-text-stroke:3px var(--ink);color:transparent}
+  .hero-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;padding:34px 0 40px;align-items:flex-end}
+  .hero-bottom p{font-size:1.3rem;font-weight:600;max-width:560px}
+  .hero-bottom .tags{font-family:var(--mono);font-size:.82rem;text-align:right;line-height:1.9}
+
+  /* marquee */
+  .marquee{background:var(--ink);color:var(--light);overflow:hidden;border-bottom:4px solid var(--ink);padding:16px 0}
+  .marquee-track{display:flex;gap:40px;white-space:nowrap;animation:scroll-x 26s linear infinite;font-family:var(--display);font-size:1.6rem;text-transform:uppercase}
+  .marquee-track span{display:flex;align-items:center;gap:40px}
+  .marquee-track span::after{content:"◆";color:var(--deep);font-size:1rem}
+  @keyframes scroll-x{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  .sec{border-bottom:4px solid var(--ink)}
+  .sec-head{display:flex;justify-content:space-between;align-items:center;padding:22px;background:var(--mid);border-bottom:4px solid var(--ink)}
+  .sec-head h2{font-family:var(--display);font-size:clamp(1.6rem,5vw,3rem);text-transform:uppercase;letter-spacing:-.02em}
+  .sec-head .n{font-family:var(--mono);font-size:.9rem}
+
+  /* about with zoom-on-scroll word */
+  .about-inner{padding:60px 22px}
+  .about-inner .lead{font-family:var(--display);font-size:clamp(1.8rem,5vw,3.6rem);line-height:1.05;text-transform:uppercase;letter-spacing:-.02em;max-width:1100px}
+  .about-inner .lead .hl{color:var(--deep)}
+  .about-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:50px;border-top:2px solid var(--ink)}
+  .about-cols div{padding:26px 26px 26px 0;border-right:2px solid var(--ink);font-size:1.02rem}
+  .about-cols div:last-child{border-right:none;padding-left:26px}
+  .about-cols b{background:var(--mid);padding:1px 6px}
+  .zoomline{font-family:var(--display);font-size:clamp(2rem,9vw,7rem);text-transform:uppercase;text-align:center;padding:70px 22px;line-height:.9;
+    transition:transform .1s linear;letter-spacing:-.03em}
+  .zoomline em{color:var(--deep);font-style:normal}
+
+  /* experience big rows */
+  .xp{display:flex;flex-direction:column}
+  .xp-row{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;padding:28px 22px;border-bottom:2px solid var(--ink);transition:background .2s,color .2s,padding-left .25s}
+  .xp-row:last-child{border-bottom:none}
+  .xp-row:hover{background:var(--ink);color:var(--light);padding-left:34px}
+  .xp-row .yr{font-family:var(--mono);font-size:.85rem}
+  .xp-row h3{font-family:var(--display);font-size:clamp(1.2rem,3.2vw,2rem);text-transform:uppercase;letter-spacing:-.01em}
+  .xp-row .org{font-family:var(--mono);font-size:.82rem;color:var(--deep)}
+  .xp-row:hover .org{color:var(--mid)}
+  .xp-row .arr{font-size:1.8rem}
+
+  /* skills blocks */
+  .skill-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .skill-col{padding:30px 22px;border-right:2px solid var(--ink)}
+  .skill-col:last-child{border-right:none}
+  .skill-col h4{font-family:var(--mono);text-transform:uppercase;font-size:.82rem;color:var(--deep);margin-bottom:16px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+  .skill-col ul{list-style:none}
+  .skill-col li{font-weight:600;font-size:1.05rem;padding:6px 0}
+  .skill-col li:hover{background:var(--mid);padding-left:8px;transition:padding .15s}
+
+  /* projects */
+  .proj{display:flex;flex-direction:column}
+  .proj-item{padding:34px 22px;border-bottom:2px solid var(--ink);display:grid;grid-template-columns:60px 1fr;gap:24px;transition:background .2s,color .2s}
+  .proj-item:last-child{border-bottom:none}
+  .proj-item:hover{background:var(--deep);color:var(--light)}
+  .proj-item .pn{font-family:var(--display);font-size:2.4rem;line-height:1}
+  .proj-item h3{font-family:var(--display);font-size:clamp(1.4rem,4vw,2.4rem);text-transform:uppercase;letter-spacing:-.02em}
+  .proj-item p{margin-top:8px;max-width:600px;font-size:1rem}
+  .proj-item .stack{font-family:var(--mono);font-size:.78rem;margin-top:12px;opacity:.85}
+
+  .pub{background:var(--ink);color:var(--light);padding:60px 22px}
+  .pub .n{font-family:var(--mono);color:var(--deep);text-transform:uppercase;font-size:.85rem;margin-bottom:18px}
+  .pub h3{font-family:var(--display);font-size:clamp(1.4rem,3.4vw,2.4rem);text-transform:uppercase;line-height:1.05;letter-spacing:-.02em;max-width:1000px}
+  .pub .meta{font-family:var(--mono);font-size:.82rem;color:var(--mid);margin-top:20px}
+
+  footer{padding:80px 22px}
+  footer h2{font-family:var(--display);font-size:clamp(2.4rem,13vw,11rem);text-transform:uppercase;line-height:.85;letter-spacing:-.04em}
+  footer .frow{display:flex;gap:24px;flex-wrap:wrap;margin-top:34px}
+  footer a{font-family:var(--mono);font-size:1rem;text-transform:uppercase;background:var(--ink);color:var(--light);text-decoration:none;padding:16px 26px;transition:background .2s}
+  footer a:hover{background:var(--deep)}
+
+  @media(max-width:880px){
+    .skill-grid{grid-template-columns:repeat(2,1fr)}
+    .about-cols{grid-template-columns:1fr}.about-cols div{border-right:none;padding-left:0!important}
+    .xp-row{grid-template-columns:1fr;gap:6px}.xp-row .arr{display:none}
+    nav a{padding:14px}
+  }
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="bar">
+    <div class="brand"><span class="sq"></span>蔡承紘 / TSAI</div>
+    <nav>
+      <a href="#about" data-en="About" data-zh="關於">About</a>
+      <a href="#" class="disabled" data-en="Projects" data-zh="專案">Projects</a>
+      <a href="#" class="disabled" data-en="Blog" data-zh="部落格">Blog</a>
+      <button class="lang" id="langBtn">中文</button>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="kick" data-en="AI Application Engineer × Frontend" data-zh="AI 應用工程師 × 前端">AI Application Engineer × Frontend</div>
+  <h1>TSAI<br><span class="o">CHENG</span>-HUNG</h1>
+  <div class="hero-bottom">
+    <p data-en="I build RAG systems, autonomous agents, and the interfaces that make them real." data-zh="我打造 RAG 系統、自主代理，以及讓它們成真的前端介面。">I build RAG systems, autonomous agents, and the interfaces that make them real.</p>
+    <div class="tags mono">M.S. MEDICAL INFORMATICS<br>KAOHSIUNG / TAIPEI<br>EMPLOYED · OPEN</div>
+  </div>
+</div>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>RAG</span><span>LANGGRAPH</span><span>AGENTS</span><span>NEXT.JS</span><span>FASTAPI</span><span>PROMPT ENGINEERING</span>
+    <span>RAG</span><span>LANGGRAPH</span><span>AGENTS</span><span>NEXT.JS</span><span>FASTAPI</span><span>PROMPT ENGINEERING</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="sec-head"><h2 data-en="About" data-zh="關於">About</h2><span class="n mono">01 / 05</span></div>
+  <div class="about-inner">
+    <div class="lead" data-en="Master's in <span class='hl'>Medical Informatics</span>, AI track. I turn machine-learning ideas into deployed, real-world products." data-zh="<span class='hl'>醫務資訊</span>碩士，AI 組。我把機器學習的想法，變成真正上線、能用的產品。">Master's in <span class="hl">Medical Informatics</span>, AI track. I turn machine-learning ideas into deployed, real-world products.</div>
+    <div class="about-cols">
+      <div data-en="Owned full-stack on a small product and led frontend on a larger one — <b>wireframes → user flows → API integration → ship</b>. Backend: agentic workflows on LangGraph, JSON-prompt personas, output guardrails." data-zh="獨立負責小專案全端、主導大專案前端——<b>wireframe → user flow → API 串接 → 上線</b>。後端：LangGraph agentic workflow、JSON Prompt persona、輸出防護機制。">Owned full-stack on a small product and led frontend on a larger one — <b>wireframes → user flows → API integration → ship</b>. Backend: agentic workflows on LangGraph, JSON-prompt personas, output guardrails.</div>
+      <div data-en="Proudest work: a complete AI system built from scratch — data preprocessing, model integration, full-stack deployment — applied to <b>public issues like air pollution</b>." data-zh="最自豪的：從零打造完整 AI 系統——資料前處理、模型整合、全端部署——並應用在<b>空污等公共議題</b>。">Proudest work: a complete AI system built from scratch — data preprocessing, model integration, full-stack deployment — applied to <b>public issues like air pollution</b>.</div>
+    </div>
+  </div>
+  <div class="zoomline" id="zoomline" data-en="I USE AI TO <em>THINK</em>." data-zh="我用 AI <em>思考</em>。">I USE AI TO <em>THINK</em>.</div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="sec" id="experience">
+  <div class="sec-head"><h2 data-en="Experience" data-zh="工作經歷">Experience</h2><span class="n mono">02 / 05</span></div>
+  <div class="xp">
+    <div class="xp-row"><div class="yr">2026.04—NOW</div><div><h3 data-en="AI Application Engineer" data-zh="AI 應用工程師">AI Application Engineer</h3><div class="org">CECI / 中華工程</div></div><div class="arr">↗</div></div>
+    <div class="xp-row"><div class="yr">2025.08—10</div><div><h3 data-en="AI Engineer · Intern" data-zh="AI 工程師 · 實習">AI Engineer · Intern</h3><div class="org">學思行數位行銷 — LangGraph / FastAPI / React / Next.js / Prisma</div></div><div class="arr">↗</div></div>
+    <div class="xp-row"><div class="yr">2025.03—06</div><div><h3 data-en="TA · Generative AI" data-zh="助教 · 生成式 AI">TA · Generative AI</h3><div class="org" data-en="Kaohsiung Medical University — ~100 students" data-zh="高雄醫學大學 — 約 100 位學生">Kaohsiung Medical University — ~100 students</div></div><div class="arr">↗</div></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="sec" id="skills">
+  <div class="sec-head"><h2 data-en="Toolkit" data-zh="技能">Toolkit</h2><span class="n mono">03 / 05</span></div>
+  <div class="skill-grid">
+    <div class="skill-col"><h4>AI / ML</h4><ul><li>PyTorch</li><li>Hugging Face</li><li>RAG</li><li>LangGraph</li><li>LoRA</li><li>Embeddings</li></ul></div>
+    <div class="skill-col"><h4 data-en="Backend" data-zh="後端">Backend</h4><ul><li>FastAPI</li><li>Flask</li><li>LangChain</li><li>Ollama</li><li>ChromaDB</li></ul></div>
+    <div class="skill-col"><h4 data-en="Frontend" data-zh="前端">Frontend</h4><ul><li>React</li><li>Next.js</li><li>TypeScript</li><li>Tailwind</li><li>Zustand</li></ul></div>
+    <div class="skill-col"><h4 data-en="Data" data-zh="資料">Data</h4><ul><li>PostgreSQL</li><li>MySQL</li><li>Prisma</li><li>Pinecone</li><li>Docker</li></ul></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="sec" id="projects">
+  <div class="sec-head"><h2 data-en="Work" data-zh="專案">Work</h2><span class="n mono">04 / 05</span></div>
+  <div class="proj">
+    <div class="proj-item"><div class="pn">01</div><div><h3 data-en="Eastern Mysticism Platform" data-zh="東方命理平台">Eastern Mysticism Platform</h3><p data-en="Multi-agent consultation platform with SSE streaming and a custom Zi-Wei chart engine." data-zh="多 Agent 命理諮詢平台，SSE 串流與自製紫微斗數排盤引擎。">Multi-agent consultation platform with SSE streaming and a custom Zi-Wei chart engine.</p><div class="stack mono">LANGGRAPH · GPT-4O · QUART · PINECONE · NEXT.JS 15 · THREE.JS</div></div></div>
+    <div class="proj-item"><div class="pn">02</div><div><h3 data-en="Multi-modal Knowledge Base" data-zh="多模態知識庫">Multi-modal Knowledge Base</h3><p data-en="Fully-local RAG platform — upload, parse, index and chat over PDFs & images." data-zh="完全本地的 RAG 平台——上傳、解析、索引並對 PDF 與圖片問答。">Fully-local RAG platform — upload, parse, index and chat over PDFs & images.</p><div class="stack mono">FASTAPI · CHROMADB · MINERU · NEXT.JS 16 · OLLAMA · DOCKER</div></div></div>
+    <div class="proj-item"><div class="pn">03</div><div><h3 data-en="RAG Air-Pollution Q&A" data-zh="RAG 空污問答">RAG Air-Pollution Q&A</h3><p data-en="Master's thesis system, deployed publicly via DuckDNS + Nginx with HTTPS." data-zh="碩士論文系統，透過 DuckDNS + Nginx 公開部署並支援 HTTPS。">Master's thesis system, deployed publicly via DuckDNS + Nginx with HTTPS.</p><div class="stack mono">BGE-M3 · GEMMA 3:12B · LANGCHAIN · MMR+RERANK · RAGAS</div></div></div>
+    <div class="proj-item"><div class="pn">04</div><div><h3 data-en="RAG Medical Q&A · ReAct" data-zh="RAG 醫療問答 · ReAct">RAG Medical Q&A · ReAct</h3><p data-en="A ReAct agent that picks a local doctor DB or live web search per question." data-zh="ReAct 代理可依問題自動選擇本地醫師資料庫或即時網路搜尋。">A ReAct agent that picks a local doctor DB or live web search per question.</p><div class="stack mono">REACT AGENT · GPT-4O · GOOGLE SERPER · LANGCHAIN</div></div></div>
+  </div>
+</section>
+
+<!-- PUBLICATION -->
+<div class="pub">
+  <div class="n mono">05 / 05 — PUBLICATION</div>
+  <h3 data-en="From Information Asymmetry to Contextual Intelligence: AI-Supported Innovation Learning for Social Impact in Environmental Governance" data-zh="From Information Asymmetry to Contextual Intelligence：環境治理中以 AI 支持社會影響的創新學習">From Information Asymmetry to Contextual Intelligence: AI-Supported Innovation Learning for Social Impact in Environmental Governance</h3>
+  <div class="meta" data-en="ORAL PRESENTATION · AIET 2026 · ZAGREB, CROATIA · CO-FIRST AUTHOR · JULY 2026" data-zh="口頭報告 · AIET 2026 · 克羅埃西亞札格雷布 · 共同第一作者 · 2026 年 7 月">ORAL PRESENTATION · AIET 2026 · ZAGREB, CROATIA · CO-FIRST AUTHOR · JULY 2026</div>
+</div>
+
+<footer>
+  <h2 data-en="LET'S<br>BUILD." data-zh="一起<br>動手做。">LET'S<br>BUILD.</h2>
+  <div class="frow">
+    <a href="mailto:pijh102511@gmail.com">EMAIL ↗</a>
+    <a href="https://github.com/Tsai1030" target="_blank">GITHUB ↗</a>
+  </div>
+</footer>
+
+<script>
+  const langBtn=document.getElementById('langBtn');
+  let lang=localStorage.getItem('lang')||'en';
+  function applyLang(){
+    document.documentElement.dataset.lang=lang;document.documentElement.lang=lang==='en'?'en':'zh-Hant';
+    document.querySelectorAll('[data-en]').forEach(el=>{const v=el.dataset[lang];if(v!=null)el.innerHTML=v;});
+    langBtn.textContent=lang==='en'?'中文':'EN';
+  }
+  langBtn.addEventListener('click',()=>{lang=lang==='en'?'zh':'en';localStorage.setItem('lang',lang);applyLang();});
+  applyLang();
+
+  const hdr=document.getElementById('hdr');let lastY=0;
+  const zoom=document.getElementById('zoomline');
+  addEventListener('scroll',()=>{const y=window.scrollY;
+    if(y>lastY&&y>160)hdr.classList.add('collapsed');else hdr.classList.remove('collapsed');lastY=y;
+    // scroll-driven zoom on the statement line
+    const r=zoom.getBoundingClientRect();const vh=innerHeight;
+    const prog=Math.max(0,Math.min(1,1-(r.top-vh*0.2)/(vh*0.8)));
+    zoom.style.transform='scale('+(0.7+prog*0.5)+')';
+  },{passive:true});
+</script>
+</body>
+</html>

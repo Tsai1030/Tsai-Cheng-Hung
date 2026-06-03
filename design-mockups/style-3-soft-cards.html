@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tsai Cheng-Hung — Soft Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,18,400;0,18,500;1,18,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep:#937474;--middeep:#B39293;--mid:#D8C4C3;--light:#F3EBEA;--ink:#2E2424;
+    --sans:"Outfit",sans-serif;--serif:"Newsreader",serif;
+    --shadow:0 24px 60px -24px rgba(46,36,36,.32);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--light);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.6}
+  ::selection{background:var(--mid)}
+
+  header{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:100;width:min(1180px,calc(100% - 28px));
+    background:color-mix(in srgb,var(--light) 80%,transparent);backdrop-filter:blur(16px);
+    border:1px solid color-mix(in srgb,var(--deep) 24%,transparent);border-radius:22px;box-shadow:var(--shadow);
+    transition:transform .45s cubic-bezier(.16,1,.3,1),top .4s ease,box-shadow .4s ease}
+  header.collapsed{transform:translateX(-50%) translateY(-160%)}
+  .bar{padding:13px 14px 13px 24px;display:flex;align-items:center;justify-content:space-between}
+  .brand{font-weight:600;font-size:1.05rem;display:flex;align-items:center;gap:10px}
+  .brand .av{width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--mid),var(--deep));display:grid;place-items:center;color:var(--light);font-weight:600;font-size:.8rem}
+  nav{display:flex;align-items:center;gap:8px}
+  nav a{font-size:.88rem;color:var(--ink);text-decoration:none;padding:8px 16px;border-radius:30px;transition:background .25s ease}
+  nav a:hover{background:var(--mid)}
+  nav a.disabled{opacity:.4;pointer-events:none;position:relative}
+  nav a.disabled small{font-size:.55rem;color:var(--deep);position:absolute;top:-2px;right:2px}
+  .lang{font-size:.85rem;font-weight:500;padding:9px 18px;border-radius:30px;border:none;background:var(--ink);color:var(--light);cursor:pointer;transition:background .25s}
+  .lang:hover{background:var(--deep)}
+
+  .hero{max-width:1180px;margin:0 auto;padding:170px 24px 60px;text-align:center}
+  .pill{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;color:var(--deep);background:#fff6;border:1px solid color-mix(in srgb,var(--deep) 20%,transparent);padding:8px 18px;border-radius:30px;margin-bottom:30px}
+  .pill .blink{width:8px;height:8px;background:var(--deep);border-radius:50%;animation:blink 2s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+  .hero h1{font-size:clamp(2.6rem,7vw,5.6rem);font-weight:600;line-height:1.05;letter-spacing:-.02em}
+  .hero h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--deep)}
+  .hero p{font-size:1.2rem;max-width:620px;margin:28px auto 0;color:color-mix(in srgb,var(--ink) 80%,transparent)}
+  .hero-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:44px}
+  .stat{background:#fff;border-radius:18px;padding:18px 26px;box-shadow:0 10px 30px -18px rgba(46,36,36,.4);min-width:130px;transition:transform .35s ease}
+  .stat:hover{transform:translateY(-5px) scale(1.04)}
+  .stat b{display:block;font-size:1.9rem;font-weight:600;color:var(--deep)}
+  .stat span{font-size:.8rem}
+
+  .sec{max-width:1180px;margin:0 auto;padding:70px 24px}
+  .sec-title{display:flex;align-items:baseline;gap:16px;margin-bottom:36px}
+  .sec-title .n{font-family:var(--serif);font-style:italic;color:var(--deep);font-size:1.3rem}
+  .sec-title h2{font-size:2.2rem;font-weight:600}
+
+  /* stacking cards */
+  .stack-wrap{position:relative}
+  .scard{position:sticky;top:120px;background:#fff;border-radius:28px;box-shadow:var(--shadow);padding:48px;margin-bottom:30px;border:1px solid #fff}
+  .scard:nth-child(1){background:var(--light);border:1px solid color-mix(in srgb,var(--deep) 18%,transparent)}
+  .scard:nth-child(2){background:var(--mid)}
+  .scard:nth-child(3){background:var(--middeep);color:var(--light)}
+  .scard .kk{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--deep);margin-bottom:12px}
+  .scard:nth-child(3) .kk{color:var(--light);opacity:.85}
+  .scard h3{font-size:1.8rem;font-weight:600;margin-bottom:16px;line-height:1.2}
+  .scard p{font-size:1.08rem;max-width:680px}
+  .scard .big-quote{font-family:var(--serif);font-size:1.7rem;line-height:1.4;font-weight:400}
+
+  /* experience timeline cards */
+  .xp-grid{display:grid;gap:16px}
+  .xp-card{background:#fff;border-radius:22px;padding:30px 34px;box-shadow:0 14px 36px -26px rgba(46,36,36,.5);display:grid;grid-template-columns:160px 1fr;gap:24px;transition:transform .35s ease,box-shadow .35s ease}
+  .xp-card:hover{transform:scale(1.015);box-shadow:var(--shadow)}
+  .xp-card .when{font-size:.85rem;color:var(--deep);font-weight:500}
+  .xp-card h3{font-size:1.35rem;font-weight:600}
+  .xp-card .org{color:var(--deep);font-size:.92rem;margin:2px 0 10px}
+  .xp-card p{font-size:.98rem}
+
+  /* skills bubble cloud with zoom */
+  .skill-block{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .sb{background:#fff;border-radius:22px;padding:26px;box-shadow:0 14px 36px -28px rgba(46,36,36,.5);transition:transform .3s ease}
+  .sb:hover{transform:translateY(-6px)}
+  .sb h4{font-family:var(--serif);font-style:italic;color:var(--deep);font-size:1.2rem;margin-bottom:14px}
+  .sb span{display:inline-block;font-size:.82rem;background:var(--light);border-radius:30px;padding:5px 12px;margin:3px 3px 0 0;transition:transform .25s ease,background .25s}
+  .sb span:hover{transform:scale(1.14);background:var(--mid)}
+
+  /* projects zoom cards */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .pcard{position:relative;border-radius:26px;overflow:hidden;background:var(--mid);padding:36px;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s}
+  .pcard::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,var(--middeep),var(--deep));opacity:0;transition:opacity .4s ease;z-index:0}
+  .pcard:hover{transform:scale(1.03);box-shadow:var(--shadow)}
+  .pcard:hover::before{opacity:1}
+  .pcard:hover *{color:var(--light)!important;position:relative;z-index:1}
+  .pcard .tag{font-family:var(--serif);font-style:italic;color:var(--deep);font-size:.95rem;margin-bottom:auto;position:relative;z-index:1}
+  .pcard h3{font-size:1.6rem;font-weight:600;position:relative;z-index:1}
+  .pcard .stack{font-size:.82rem;color:color-mix(in srgb,var(--ink) 70%,transparent);margin-top:10px;position:relative;z-index:1}
+
+  .pub-card{background:var(--ink);color:var(--light);border-radius:28px;padding:48px;box-shadow:var(--shadow)}
+  .pub-card .kk{font-family:var(--serif);font-style:italic;color:var(--middeep);margin-bottom:14px}
+  .pub-card h3{font-size:1.7rem;font-weight:600;line-height:1.25;max-width:880px}
+  .pub-card .meta{color:var(--mid);margin-top:18px;font-size:.92rem}
+
+  footer{text-align:center;padding:90px 24px 70px}
+  footer h2{font-size:clamp(2.2rem,6vw,4rem);font-weight:600;line-height:1.05}
+  footer h2 em{font-family:var(--serif);font-style:italic;color:var(--deep)}
+  .fbtns{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+  .fbtn{padding:15px 30px;border-radius:30px;text-decoration:none;font-weight:500;transition:transform .3s ease}
+  .fbtn:hover{transform:translateY(-4px)}
+  .fbtn.dark{background:var(--ink);color:var(--light)}
+  .fbtn.out{border:1px solid var(--deep);color:var(--deep)}
+
+  @media(max-width:880px){
+    .skill-block{grid-template-columns:repeat(2,1fr)}.proj-grid{grid-template-columns:1fr}
+    .xp-card{grid-template-columns:1fr}.scard{padding:30px;top:90px}nav a:not(.disabled){display:none}
+  }
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="bar">
+    <div class="brand"><span class="av">承</span>Tsai Cheng-Hung</div>
+    <nav>
+      <a href="#about" data-en="About" data-zh="關於">About</a>
+      <a href="#" class="disabled" data-en="Projects" data-zh="專案">Projects<small>soon</small></a>
+      <a href="#" class="disabled" data-en="Blog" data-zh="部落格">Blog<small>soon</small></a>
+      <button class="lang" id="langBtn">中文</button>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="pill"><span class="blink"></span><span data-en="Open to AI / Frontend roles" data-zh="開放 AI / 前端職缺機會">Open to AI / Frontend roles</span></div>
+  <h1 data-en="I build <em>thoughtful</em><br>AI products." data-zh="我打造<em>有溫度</em>的<br>AI 產品。">I build <em>thoughtful</em><br>AI products.</h1>
+  <p data-en="AI Application & Frontend Engineer bridging medical informatics and machine learning — from RAG systems to the interfaces around them." data-zh="AI 應用與前端工程師，結合醫務資訊與機器學習——從 RAG 系統到環繞它的使用者介面。">AI Application & Frontend Engineer bridging medical informatics and machine learning — from RAG systems to the interfaces around them.</p>
+  <div class="hero-stats">
+    <div class="stat"><b>4+</b><span data-en="Shipped systems" data-zh="上線系統">Shipped systems</span></div>
+    <div class="stat"><b>~100</b><span data-en="Students taught" data-zh="教過的學生">Students taught</span></div>
+    <div class="stat"><b>M.S.</b><span data-en="Medical Informatics" data-zh="醫務資訊碩士">Medical Informatics</span></div>
+    <div class="stat"><b>1</b><span data-en="Paper (AIET 2026)" data-zh="論文（AIET 2026）">Paper (AIET 2026)</span></div>
+  </div>
+</div>
+
+<!-- ABOUT stacking -->
+<section class="sec" id="about">
+  <div class="sec-title"><span class="n">01</span><h2 data-en="About me" data-zh="關於我">About me</h2></div>
+  <div class="stack-wrap">
+    <div class="scard">
+      <div class="kk" data-en="The background" data-zh="背景">The background</div>
+      <h3 data-en="Medical informatics, AI track." data-zh="醫務資訊，AI 組。">Medical informatics, AI track.</h3>
+      <p data-en="I'm Tsai Cheng-Hung, a Master's graduate from Kaohsiung Medical University. My program centered on machine learning and deep-learning development — a cross-domain edge that lets me understand both the data and the people using it." data-zh="我是蔡承紘，高雄醫學大學碩士。所學聚焦於機器學習與深度學習開發——跨領域的優勢讓我同時理解資料與使用者。">I'm Tsai Cheng-Hung, a Master's graduate from Kaohsiung Medical University. My program centered on machine learning and deep-learning development — a cross-domain edge that lets me understand both the data and the people using it.</p>
+    </div>
+    <div class="scard">
+      <div class="kk" data-en="The work" data-zh="實作">The work</div>
+      <h3 data-en="From wireframe to shipped." data-zh="從 wireframe 到上線。">From wireframe to shipped.</h3>
+      <p data-en="In my internship I owned full-stack on a small product and led frontend on a larger one — wireframes, user flows, API integration, deployment. On the backend I design agentic workflows with LangGraph, JSON-prompt personas, and guardrails that keep malformed output from breaking the UI." data-zh="實習時我獨立負責小專案全端、主導大專案前端——wireframe、user flow、API 串接、部署。後端則用 LangGraph 設計 agentic workflow、JSON Prompt persona，並建立防護機制避免格式異常造成前端錯誤。">In my internship I owned full-stack on a small product and led frontend on a larger one — wireframes, user flows, API integration, deployment. On the backend I design agentic workflows with LangGraph, JSON-prompt personas, and guardrails that keep malformed output from breaking the UI.</p>
+    </div>
+    <div class="scard">
+      <div class="kk" data-en="The philosophy" data-zh="信念">The philosophy</div>
+      <p class="big-quote" data-en="“I don't just use AI to write code — I use AI to accelerate thinking, implement ideas, and solve problems. That's my core value as a new-generation engineer.”" data-zh="「我不是只靠 AI 寫程式，而是善用 AI 加速思考、實踐想法、解決問題。這是我作為新世代工程人才的核心價值。」">“I don't just use AI to write code — I use AI to accelerate thinking, implement ideas, and solve problems. That's my core value as a new-generation engineer.”</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="sec" id="experience">
+  <div class="sec-title"><span class="n">02</span><h2 data-en="Experience" data-zh="工作經歷">Experience</h2></div>
+  <div class="xp-grid">
+    <div class="xp-card"><div class="when">2026.04 — <span data-en="Present" data-zh="迄今">Present</span></div><div><h3 data-en="AI Application Engineer" data-zh="AI 應用工程師">AI Application Engineer</h3><div class="org">CECI / 中華工程</div><p data-en="Production RAG systems, autonomous agents, and automation pipelines." data-zh="產品級 RAG 系統、自主 Agent 與自動化流程。">Production RAG systems, autonomous agents, and automation pipelines.</p></div></div>
+    <div class="xp-card"><div class="when">2025.08 — 2025.10</div><div><h3 data-en="AI Engineer (Intern)" data-zh="AI 工程師（實習）">AI Engineer (Intern)</h3><div class="org">學思行數位行銷</div><p data-en="Full-stack on a small product, frontend lead on a large one — LangGraph, FastAPI/Flask, RAG, React/Next.js, Zustand, Prisma + PostgreSQL." data-zh="小專案全端、大專案前端主導——LangGraph、FastAPI/Flask、RAG、React/Next.js、Zustand、Prisma + PostgreSQL。">Full-stack on a small product, frontend lead on a large one — LangGraph, FastAPI/Flask, RAG, React/Next.js, Zustand, Prisma + PostgreSQL.</p></div></div>
+    <div class="xp-card"><div class="when">2025.03 — 2025.06</div><div><h3 data-en="TA — Generative AI" data-zh="助教 — 生成式 AI">TA — Generative AI</h3><div class="org" data-en="Kaohsiung Medical University" data-zh="高雄醫學大學">Kaohsiung Medical University</div><p data-en="Supported ~100 students with model application & coding; designed AI problem-solving tasks." data-zh="支援約 100 位學生的模型應用與程式開發，設計 AI 解題任務。">Supported ~100 students with model application & coding; designed AI problem-solving tasks.</p></div></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="sec" id="skills">
+  <div class="sec-title"><span class="n">03</span><h2 data-en="Toolkit" data-zh="技能">Toolkit</h2></div>
+  <div class="skill-block">
+    <div class="sb"><h4 data-en="AI / ML" data-zh="AI / 機器學習">AI / ML</h4><span>PyTorch</span><span>Hugging Face</span><span>RAG</span><span>LangGraph</span><span>Agentic Workflow</span><span>LoRA</span><span>Embeddings</span></div>
+    <div class="sb"><h4 data-en="Backend" data-zh="後端">Backend</h4><span>FastAPI</span><span>Flask</span><span>LangChain</span><span>Ollama</span><span>ChromaDB</span><span>REST</span></div>
+    <div class="sb"><h4 data-en="Frontend" data-zh="前端">Frontend</h4><span>React</span><span>Next.js</span><span>TypeScript</span><span>Tailwind</span><span>Vite</span><span>Zustand</span></div>
+    <div class="sb"><h4 data-en="Data" data-zh="資料">Data</h4><span>PostgreSQL</span><span>MySQL</span><span>Prisma</span><span>Pinecone</span><span>Git</span><span>Docker</span></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="sec" id="projects">
+  <div class="sec-title"><span class="n">04</span><h2 data-en="Selected work" data-zh="精選專案">Selected work</h2></div>
+  <div class="proj-grid">
+    <div class="pcard"><div class="tag" data-en="Multi-agent · live" data-zh="多代理 · 上線">Multi-agent · live</div><h3 data-en="Eastern Mysticism Platform" data-zh="東方命理平台">Eastern Mysticism Platform</h3><div class="stack">LangGraph · GPT-4o · Quart · Pinecone · Next.js 15 · Three.js</div></div>
+    <div class="pcard"><div class="tag" data-en="Local RAG" data-zh="本地 RAG">Local RAG</div><h3 data-en="Multi-modal Knowledge Base" data-zh="多模態知識庫">Multi-modal Knowledge Base</h3><div class="stack">FastAPI · ChromaDB · MinerU · Next.js 16 · Ollama · Docker</div></div>
+    <div class="pcard"><div class="tag" data-en="Master's thesis" data-zh="碩士論文">Master's thesis</div><h3 data-en="RAG Air-Pollution Q&A" data-zh="RAG 空污問答">RAG Air-Pollution Q&A</h3><div class="stack">bge-m3 · Gemma 3:12B · LangChain · MMR + Rerank · RAGAS</div></div>
+    <div class="pcard"><div class="tag" data-en="ReAct agent" data-zh="ReAct 代理">ReAct agent</div><h3 data-en="RAG Medical Q&A" data-zh="RAG 醫療問答">RAG Medical Q&A</h3><div class="stack">ReAct · GPT-4o · Google Serper · LangChain · FastAPI</div></div>
+  </div>
+</section>
+
+<!-- PUBLICATION -->
+<section class="sec">
+  <div class="pub-card">
+    <div class="kk" data-en="Publication · AIET 2026" data-zh="學術發表 · AIET 2026">Publication · AIET 2026</div>
+    <h3 data-en="From Information Asymmetry to Contextual Intelligence: AI-Supported Innovation Learning for Social Impact in Environmental Governance" data-zh="From Information Asymmetry to Contextual Intelligence：環境治理中以 AI 支持社會影響的創新學習">From Information Asymmetry to Contextual Intelligence: AI-Supported Innovation Learning for Social Impact in Environmental Governance</h3>
+    <div class="meta" data-en="Oral presentation · Zagreb, Croatia · Co-first author · July 2026" data-zh="口頭報告 · 克羅埃西亞札格雷布 · 共同第一作者 · 2026 年 7 月">Oral presentation · Zagreb, Croatia · Co-first author · July 2026</div>
+  </div>
+</section>
+
+<footer>
+  <h2 data-en="Let's make something<br><em>people love</em>." data-zh="一起做出<br><em>讓人喜歡</em>的東西。">Let's make something<br><em>people love</em>.</h2>
+  <div class="fbtns">
+    <a class="fbtn dark" href="mailto:pijh102511@gmail.com">pijh102511@gmail.com</a>
+    <a class="fbtn out" href="https://github.com/Tsai1030" target="_blank">GitHub →</a>
+  </div>
+</footer>
+
+<script>
+  const langBtn=document.getElementById('langBtn');
+  let lang=localStorage.getItem('lang')||'en';
+  function applyLang(){
+    document.documentElement.dataset.lang=lang;document.documentElement.lang=lang==='en'?'en':'zh-Hant';
+    document.querySelectorAll('[data-en]').forEach(el=>{const v=el.dataset[lang];if(v!=null)el.innerHTML=v;});
+    langBtn.textContent=lang==='en'?'中文':'EN';
+  }
+  langBtn.addEventListener('click',()=>{lang=lang==='en'?'zh':'en';localStorage.setItem('lang',lang);applyLang();});
+  applyLang();
+  const hdr=document.getElementById('hdr');let lastY=0;
+  addEventListener('scroll',()=>{const y=window.scrollY;if(y>lastY&&y>180)hdr.classList.add('collapsed');else hdr.classList.remove('collapsed');lastY=y;},{passive:true});
+</script>
+</body>
+</html>

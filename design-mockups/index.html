@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Style Explorations</title>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{--deep:#937474;--middeep:#B39293;--mid:#D8C4C3;--light:#F3EBEA;--ink:#2E2424}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--light);color:var(--ink);font-family:"Spectral",serif;font-weight:300;padding:60px 30px 80px}
+  .wrap{max-width:1100px;margin:0 auto}
+  h1{font-size:2.6rem;font-weight:500;letter-spacing:-.01em}
+  .sub{color:var(--deep);margin:10px 0 8px;font-family:"Space Mono",monospace;font-size:.82rem;letter-spacing:.05em}
+  .pal{display:flex;gap:8px;margin:24px 0 50px}
+  .pal span{width:46px;height:46px;border-radius:8px;border:1px solid #00000010}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+  a.card{display:block;text-decoration:none;color:var(--ink);background:#fff;border:1px solid color-mix(in srgb,var(--deep) 20%,transparent);border-radius:18px;padding:30px;transition:transform .3s ease,box-shadow .3s ease}
+  a.card:hover{transform:translateY(-6px);box-shadow:0 24px 50px -28px rgba(46,36,36,.5)}
+  .num{font-family:"Space Mono",monospace;color:var(--deep);font-size:.8rem}
+  .card h2{font-size:1.6rem;font-weight:500;margin:8px 0 10px}
+  .card p{font-size:.95rem;opacity:.8}
+  .card .feat{font-family:"Space Mono",monospace;font-size:.72rem;color:var(--deep);margin-top:16px}
+  .note{margin-top:40px;font-size:.9rem;opacity:.7;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Tsai Cheng-Hung — Résumé Style Explorations</h1>
+  <div class="sub">5 directions · same palette · pick one to develop in Next.js</div>
+  <div class="pal">
+    <span style="background:#937474" title="#937474"></span>
+    <span style="background:#B39293" title="#B39293"></span>
+    <span style="background:#D8C4C3" title="#D8C4C3"></span>
+    <span style="background:#F3EBEA" title="#F3EBEA"></span>
+    <span style="background:#2E2424" title="#2E2424"></span>
+  </div>
+  <div class="grid">
+    <a class="card" href="style-1-editorial.html"><div class="num">01</div><h2>Editorial Serif</h2><p>High-end print magazine. Big serif display, drop caps, asymmetric grid.</p><div class="feat">STICKY SECTION LABELS · NUMBERED</div></a>
+    <a class="card" href="style-2-swiss-grid.html"><div class="num">02</div><h2>Swiss Grid / Technical</h2><p>Engineer-precise. Strict 12-col grid, monospace metadata, ruled lines.</p><div class="feat">HORIZONTAL-SCROLL SKILL TRACK</div></a>
+    <a class="card" href="style-3-soft-cards.html"><div class="num">03</div><h2>Soft Warm Cards</h2><p>Cozy and approachable. Floating pill nav, rounded surfaces, soft shadows.</p><div class="feat">STACKING STICKY CARDS · ZOOM</div></a>
+    <a class="card" href="style-4-brutalist.html"><div class="num">04</div><h2>Brutalist Bold Type</h2><p>Loud and confident. Huge type, thick borders, high contrast.</p><div class="feat">MARQUEE · SCROLL-DRIVEN ZOOM</div></a>
+    <a class="card" href="style-5-luxe-dark.html"><div class="num">05</div><h2>Luxe Dark Cinematic</h2><p>Premium and moody. Dark base, glow, refined serif, fade-in motion.</p><div class="feat">REVEAL-ON-SCROLL · H-GALLERY</div></a>
+  </div>
+  <div class="note">
+    Each mockup includes the live <b>EN / 中 toggle</b>, a <b>header that collapses on scroll-down</b>, reserved <b>Projects + Blog</b> tabs (disabled), and an interactive About section. These are direction prototypes — the chosen one becomes the real Next.js + Tailwind + bun build.
+  </div>
+</div>
+</body>
+</html>
