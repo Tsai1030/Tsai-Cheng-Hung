@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useLang } from "./LangContext";
 import type { ProjectCard } from "@/lib/api";
 
@@ -73,8 +74,14 @@ export default function ProjectsView({
             <Link className="pj-card" href={`/projects/${p.slug}`} key={p.id}>
               <div className="pj-cover">
                 {p.cover_image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={p.cover_image} alt="" />
+                  <Image
+                    src={p.cover_image}
+                    alt=""
+                    fill
+                    sizes="(max-width: 820px) 100vw, 600px"
+                    style={{ objectFit: "cover" }}
+                    priority={i < 2}
+                  />
                 ) : (
                   <span className="pj-figno">{n}</span>
                 )}
