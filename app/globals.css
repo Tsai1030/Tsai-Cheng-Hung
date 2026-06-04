@@ -128,7 +128,7 @@ section { max-width: 1280px; margin: 0 auto; padding: 90px 40px; border-top: 1px
 
 /* projects */
 .proj { display: grid; gap: 0; }
-.proj-item { padding: 34px 0; border-bottom: 1px solid color-mix(in srgb, var(--deep) 16%, transparent); display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: baseline; transition: background .35s ease, padding .35s ease; }
+.proj-item { padding: 34px 0; border-bottom: 1px solid color-mix(in srgb, var(--deep) 16%, transparent); display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: baseline; transition: background .35s ease, padding .35s ease; text-decoration: none; color: inherit; }
 .proj-item:hover { background: color-mix(in srgb, var(--mid) 40%, transparent); padding-left: 22px; padding-right: 22px; }
 .proj-item h3 { font-family: var(--serif); font-size: 2rem; font-weight: 500; }
 .proj-item .stack { font-size: .82rem; color: var(--deep); margin-top: 8px; letter-spacing: .03em; }

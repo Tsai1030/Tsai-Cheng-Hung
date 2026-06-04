@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { L, Rich, useLang } from "./LangContext";
 import { GitHubIcon, LinkedInIcon, MailIcon, PhoneIcon } from "./icons";
+import type { ProjectCard } from "@/lib/api";
 
 export function About() {
   return (
@@ -143,31 +144,9 @@ export function Skills() {
   );
 }
 
-const projects: { title: { en: string; zh: string }; stack: string; desc: { en: string; zh: string } }[] = [
-  {
-    title: { en: "Eastern Mysticism Platform", zh: "東方命理平台" },
-    stack: "LangGraph · GPT-4o · Quart · Redis · PostgreSQL + Pinecone · Next.js 15 · Three.js / GSAP",
-    desc: { en: "Multi-agent consultation platform with SSE streaming and a custom Zi-Wei chart engine.", zh: "多 Agent 命理諮詢平台，支援 SSE 串流與自製紫微斗數排盤引擎。" },
-  },
-  {
-    title: { en: "Multi-modal AI Knowledge Base", zh: "多模態 AI 知識庫" },
-    stack: "FastAPI · ChromaDB · MinerU · RAGAnything · Next.js 16 · Ollama · Docker",
-    desc: { en: "Fully local RAG platform: upload PDFs & images, parse, index, and chat — data never leaves the box.", zh: "完全本地的 RAG 平台：上傳 PDF 與圖片，自動解析、索引、問答，資料不外傳。" },
-  },
-  {
-    title: { en: "RAG Air-Pollution Q&A", zh: "RAG 空污問答系統" },
-    stack: "bge-m3 · Chroma · Gemma 3:12B · LangChain · FastAPI · MMR + Rerank · RAGAS",
-    desc: { en: "My Master's thesis system — deployed publicly via DuckDNS + Nginx with HTTPS.", zh: "我的碩士論文系統——透過 DuckDNS + Nginx 公開部署並支援 HTTPS。" },
-  },
-  {
-    title: { en: "RAG Medical Q&A (ReAct)", zh: "RAG 醫療問答（ReAct）" },
-    stack: "ReAct Agent · GPT-4o · Google Serper · LangChain · FastAPI",
-    desc: { en: "A ReAct agent that chooses between a local doctor database and live web search per question.", zh: "ReAct 代理可依問題自動選擇本地醫師資料庫或即時網路搜尋。" },
-  },
-];
-
-export function Projects() {
+export function Projects({ projects }: { projects: ProjectCard[] }) {
   const { lang } = useLang();
+  const t = <T,>(en: T, zh: T) => (lang === "en" ? en : zh);
   return (
     <section id="projects">
       <div className="layout">
@@ -177,15 +156,15 @@ export function Projects() {
           <p className="tag"><L en="Systems shipped, not just demoed." zh="不只是 demo，而是真正上線的系統。" /></p>
         </div>
         <div className="proj">
-          {projects.map((p, i) => (
-            <div className="proj-item" key={i}>
+          {projects.map((p) => (
+            <Link className="proj-item" href={`/projects/${p.slug}`} key={p.id}>
               <div>
-                <h3><L {...p.title} /></h3>
-                <div className="stack">{p.stack}</div>
-                <p><L {...p.desc} /></p>
+                <h3>{t(p.title_en, p.title_zh)}</h3>
+                <div className="stack">{p.tech.join(" · ")}</div>
+                <p>{t(p.summary_en, p.summary_zh)}</p>
               </div>
               <div className="proj-arrow">↗</div>
-            </div>
+            </Link>
           ))}
           <div className="proj-more">
             <Link href="/projects">

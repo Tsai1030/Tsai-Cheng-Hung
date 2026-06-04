@@ -38,6 +38,17 @@ export async function getProjects(): Promise<ProjectCard[]> {
   return res.json();
 }
 
+// Degrades to [] if the backend is unreachable (e.g. at build time) so the
+// homepage still renders. Use on the homepage; routes that *are* the data
+// (e.g. /projects) should use getProjects() and surface errors.
+export async function getProjectsSafe(): Promise<ProjectCard[]> {
+  try {
+    return await getProjects();
+  } catch {
+    return [];
+  }
+}
+
 export async function getProject(slug: string): Promise<ProjectDetail | null> {
   const res = await fetch(`${API_BASE}/projects/${encodeURIComponent(slug)}`, {
     next: { revalidate: REVALIDATE },
