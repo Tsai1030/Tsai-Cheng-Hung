@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { L, Rich } from "./LangContext";
 
 export default function Hero() {
@@ -39,7 +40,16 @@ export default function Hero() {
       <div className="photo-card">
         <span className="tape"><L en="Portrait" zh="個人照" /></span>
         <div className="frame">
-          <img src="/about.jpg" alt="Tsai Cheng-Hung" />
+          <div className="shot">
+            <Image
+              src="/about.jpg"
+              alt="Tsai Cheng-Hung"
+              fill
+              sizes="(max-width: 980px) 380px, 420px"
+              style={{ objectFit: "cover" }}
+              priority
+            />
+          </div>
           <div className="cap">
             <span>Tsai Cheng-Hung</span>
             <span>2026</span>

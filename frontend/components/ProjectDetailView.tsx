@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useLang } from "./LangContext";
@@ -79,10 +80,9 @@ export default function ProjectDetailView({ project: p }: { project: ProjectDeta
         </div>
       )}
 
-      {showCover && (
+      {showCover && p.cover_image && (
         <div className="pd-cover">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={p.cover_image ?? ""} alt="" />
+          <Image src={p.cover_image} alt="" fill sizes="(max-width: 820px) 100vw, 880px" style={{ objectFit: "cover" }} />
         </div>
       )}
 

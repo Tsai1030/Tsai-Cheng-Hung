@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { L } from "./LangContext";
 
 type Bi = { en: string; zh: string };
@@ -117,8 +118,13 @@ export default function CareerSlices() {
             {cards.map((c, i) => (
               <article className="cs-card" key={i}>
                 <div className="ph">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={c.img} alt="" style={c.pos ? { objectPosition: c.pos } : undefined} />
+                  <Image
+                    src={c.img}
+                    alt=""
+                    fill
+                    sizes="(max-width: 880px) 80vw, 420px"
+                    style={{ objectFit: "cover", objectPosition: c.pos }}
+                  />
                   <span className="badge"><L {...c.badge} /></span>
                   <div className="role">
                     <h3><L {...c.role} /></h3>

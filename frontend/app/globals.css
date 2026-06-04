@@ -58,7 +58,8 @@ nav a.disabled::before { content: "soon"; position: absolute; top: -12px; right:
 /* photo card */
 .photo-card { position: relative; }
 .photo-card .frame { position: relative; border: 1px solid color-mix(in srgb, var(--deep) 40%, transparent); padding: 12px; background: #fff; }
-.photo-card img { display: block; width: 100%; aspect-ratio: 4/5; object-fit: cover; filter: grayscale(.25) contrast(1.02); }
+.photo-card .shot { position: relative; aspect-ratio: 4/5; overflow: hidden; }
+.photo-card .shot img { object-fit: cover; filter: grayscale(.25) contrast(1.02); }
 .photo-card .cap { display: flex; justify-content: space-between; font-family: var(--body); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--deep); margin-top: 12px; }
 .photo-card .tape { position: absolute; top: -14px; left: 50%; transform: translateX(-50%) rotate(-2deg); background: color-mix(in srgb, var(--mid) 80%, transparent);
   font-family: var(--body); font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); padding: 5px 18px; border: 1px solid color-mix(in srgb, var(--deep) 30%, transparent); }
@@ -232,7 +233,7 @@ footer .contact a svg { width: 17px; height: 17px; fill: currentColor; flex: non
 .pd-ghstats .ghstat svg { width: 15px; height: 15px; fill: var(--deep); }
 .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
 .pd-chips span { font-size: .76rem; letter-spacing: .03em; padding: 6px 13px; border-radius: 30px; background: color-mix(in srgb, var(--mid) 52%, transparent); color: var(--deep); }
-.pd-cover { aspect-ratio: 16/9; background: var(--mid); margin: 40px 0; overflow: hidden; }
+.pd-cover { position: relative; aspect-ratio: 16/9; background: var(--mid); margin: 40px 0; overflow: hidden; }
 .pd-cover img { width: 100%; height: 100%; object-fit: cover; }
 .pd-video { margin-top: 40px; aspect-ratio: 16 / 9; width: 100%; border: 1px solid color-mix(in srgb, var(--deep) 24%, transparent); overflow: hidden; background: var(--ink); }
 .pd-video iframe { width: 100%; height: 100%; border: 0; display: block; }
@@ -273,6 +274,12 @@ footer .contact a svg { width: 17px; height: 17px; fill: currentColor; flex: non
   .gal-track::-webkit-scrollbar { display: none; }
   .cs-card { flex: 0 0 80vw; max-width: 340px; scroll-snap-align: start; }
   .gal-note { padding: 18px 22px 0; }
+}
+
+/* phones: the hero name is pinned at the clamp floor (3.2rem) below ~600px,
+   which overflows narrow screens — let it scale back down with the viewport */
+@media (max-width: 600px) {
+  .hero h1 { font-size: clamp(2.5rem, 10vw, 3.2rem); }
 }
 
 /* ---------- RAG chat widget ---------- */
