@@ -58,4 +58,52 @@ export async function getProject(slug: string): Promise<ProjectDetail | null> {
   return res.json();
 }
 
+export type PostCard = {
+  id: number;
+  slug: string;
+  title_en: string;
+  title_zh: string;
+  excerpt_en: string;
+  excerpt_zh: string;
+  cover_image: string | null;
+  tags: string[];
+  reading_minutes: number;
+  published_at: string | null;
+};
+
+export type PostDetail = PostCard & {
+  body_en: string;
+  body_zh: string;
+  meta_title_en: string | null;
+  meta_title_zh: string | null;
+  meta_description_en: string | null;
+  meta_description_zh: string | null;
+  og_image: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export async function getPosts(): Promise<PostCard[]> {
+  const res = await fetch(`${API_BASE}/posts`, { next: { revalidate: REVALIDATE } });
+  if (!res.ok) throw new Error(`GET /posts failed: ${res.status}`);
+  return res.json();
+}
+
+export async function getPostsSafe(): Promise<PostCard[]> {
+  try {
+    return await getPosts();
+  } catch {
+    return [];
+  }
+}
+
+export async function getPost(slug: string): Promise<PostDetail | null> {
+  const res = await fetch(`${API_BASE}/posts/${encodeURIComponent(slug)}`, {
+    next: { revalidate: REVALIDATE },
+  });
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`GET /posts/${slug} failed: ${res.status}`);
+  return res.json();
+}
+
 export { API_BASE };

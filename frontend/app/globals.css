@@ -183,6 +183,33 @@ footer .contact a svg { width: 17px; height: 17px; fill: currentColor; flex: non
 .pager .disabled { opacity: .35; pointer-events: none; }
 .pager .arrow { font-family: var(--serif); font-size: 1.2rem; }
 
+/* ---------- BLOG list page (date rail) ---------- */
+.bl-head { max-width: 1080px; margin: 0 auto; padding: 170px 40px 24px; }
+.bl-eyebrow { font-size: .78rem; letter-spacing: .32em; text-transform: uppercase; color: var(--deep); margin-bottom: 18px; }
+.bl-head h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(3rem, 8vw, 5.5rem); line-height: .95; }
+.bl-feed { max-width: 1080px; margin: 0 auto; padding: 24px 40px 30px; }
+.bl-post { display: grid; grid-template-columns: 150px 1fr; gap: 40px; text-decoration: none; color: inherit; padding: 38px 0; border-top: 1px solid color-mix(in srgb, var(--deep) 20%, transparent); align-items: start; }
+.bl-rail { position: relative; padding-left: 22px; }
+.bl-rail::before { content: ""; position: absolute; left: 0; top: 6px; width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--deep); background: var(--light); transition: background .3s ease; }
+.bl-post:hover .bl-rail::before { background: var(--deep); }
+.bl-rail .bl-d { font-family: var(--serif); font-size: 1.5rem; color: var(--ink); line-height: 1.1; }
+.bl-rail .bl-y { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--deep); margin-top: 4px; }
+.bl-rail .bl-rt { font-size: .74rem; color: var(--deep); margin-top: 10px; }
+.bl-title { font-family: var(--serif); font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 500; line-height: 1.1; margin-bottom: 10px; transition: color .3s ease; }
+.bl-post:hover .bl-title { color: var(--deep); }
+.bl-ex { font-size: 1.02rem; color: color-mix(in srgb, var(--ink) 80%, transparent); max-width: 620px; }
+.bl-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.bl-tags span { font-size: .72rem; color: var(--deep); border: 1px solid color-mix(in srgb, var(--deep) 30%, transparent); padding: 4px 11px; border-radius: 30px; }
+
+@media (max-width: 720px) {
+  .bl-head { padding: 140px 22px 16px; }
+  .bl-feed { padding: 16px 22px 24px; }
+  .bl-post { grid-template-columns: 1fr; gap: 10px; }
+  .bl-rail { padding-left: 0; display: flex; gap: 12px; align-items: baseline; }
+  .bl-rail::before { display: none; }
+  .bl-rail .bl-rt { margin-top: 0; }
+}
+
 /* ---------- PROJECT detail page ---------- */
 .pd-wrap { max-width: 880px; margin: 0 auto; padding: 165px 40px 110px; }
 .pd-back { font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--deep); text-decoration: none; }
