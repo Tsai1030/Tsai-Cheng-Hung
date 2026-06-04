@@ -4,9 +4,9 @@ projects + posts here (Stage 1). doc_chunks comes in Stage 5.
 Importing this module registers all model metadata on Base for Alembic.
 """
 
-from datetime import datetime
+from datetime import date, datetime
 
-from sqlalchemy import Boolean, DateTime, Integer, String, Text, func
+from sqlalchemy import Boolean, Date, DateTime, Integer, String, Text, func
 from sqlalchemy.dialects.postgresql import ARRAY, JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -27,9 +27,12 @@ class Project(Base):
     body_zh: Mapped[str] = mapped_column(Text, default="")
 
     cover_image: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    video_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
     tech: Mapped[list[str]] = mapped_column(ARRAY(String), default=list)
     links: Mapped[dict] = mapped_column(JSONB, default=dict)
     period: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    # Optional sort key — set in the DB to order /projects newest-first (to the day).
+    project_date: Mapped[date | None] = mapped_column(Date, nullable=True)
     role_en: Mapped[str | None] = mapped_column(String(160), nullable=True)
     role_zh: Mapped[str | None] = mapped_column(String(160), nullable=True)
 
@@ -39,6 +42,10 @@ class Project(Base):
     meta_description_en: Mapped[str | None] = mapped_column(Text, nullable=True)
     meta_description_zh: Mapped[str | None] = mapped_column(Text, nullable=True)
     og_image: Mapped[str | None] = mapped_column(String(500), nullable=True)
+
+    # Optional GitHub stats shown next to the repo link on the detail page.
+    github_stars: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    github_forks: Mapped[int | None] = mapped_column(Integer, nullable=True)
 
     featured: Mapped[bool] = mapped_column(Boolean, default=False)
     sort: Mapped[int] = mapped_column(Integer, default=0)

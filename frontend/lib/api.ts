@@ -23,6 +23,9 @@ export type ProjectCard = {
 export type ProjectDetail = ProjectCard & {
   body_en: string;
   body_zh: string;
+  video_url: string | null;
+  github_stars: number | null;
+  github_forks: number | null;
   meta_title_en: string | null;
   meta_title_zh: string | null;
   meta_description_en: string | null;

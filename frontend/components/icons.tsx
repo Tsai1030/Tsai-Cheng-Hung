@@ -29,3 +29,19 @@ export function PhoneIcon() {
     </svg>
   );
 }
+
+export function StarIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2.5l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.9 6.1 20.97l1.1-6.47L2.5 9.92l6.5-.95L12 2.5z" />
+    </svg>
+  );
+}
+
+export function ForkIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6 3a3 3 0 0 0-1 5.83V10a3 3 0 0 0 3 3h3v2.17a3 3 0 1 0 2 0V13h3a3 3 0 0 0 3-3V8.83A3 3 0 1 0 17 3a3 3 0 0 0-1 5.83V10a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V8.83A3 3 0 0 0 6 3z" />
+    </svg>
+  );
+}

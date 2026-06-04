@@ -16,7 +16,11 @@ async def list_projects(
     stmt = select(Project)
     if published:
         stmt = stmt.where(Project.published.is_(True))
-    stmt = stmt.order_by(Project.featured.desc(), Project.sort.asc(), Project.created_at.desc())
+    stmt = stmt.order_by(
+        Project.project_date.desc().nullslast(),
+        Project.sort.asc(),
+        Project.created_at.desc(),
+    )
     result = await session.execute(stmt)
     return list(result.scalars().all())
 

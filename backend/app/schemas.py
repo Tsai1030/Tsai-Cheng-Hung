@@ -27,6 +27,9 @@ class ProjectCard(_ORM):
 class ProjectDetail(ProjectCard):
     body_en: str
     body_zh: str
+    video_url: str | None = None
+    github_stars: int | None = None
+    github_forks: int | None = None
     meta_title_en: str | None = None
     meta_title_zh: str | None = None
     meta_description_en: str | None = None
