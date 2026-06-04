@@ -24,6 +24,12 @@ class Settings(BaseSettings):
 
     environment: str = "development"
 
+    # --- RAG assistant (Stage 5) ---
+    google_api_key: str = ""
+    gemini_chat_model: str = "gemini-3.5-flash"
+    gemini_embed_model: str = "gemini-embedding-2"
+    embed_dim: int = 768
+
     @property
     def cors_origin_list(self) -> list[str]:
         return [o.strip() for o in self.cors_origins.split(",") if o.strip()]

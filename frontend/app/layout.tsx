@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Spectral } from "next/font/google";
 import "./globals.css";
 import { LangProvider } from "@/components/LangContext";
+import ChatWidget from "@/components/ChatWidget";
 
 const serif = Cormorant_Garamond({
   subsets: ["latin"],
@@ -29,7 +30,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" data-lang="en" className={`${serif.variable} ${body.variable}`}>
       <body>
-        <LangProvider>{children}</LangProvider>
+        <LangProvider>
+          {children}
+          <ChatWidget />
+        </LangProvider>
       </body>
     </html>
   );

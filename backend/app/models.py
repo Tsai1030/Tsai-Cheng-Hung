@@ -6,6 +6,7 @@ Importing this module registers all model metadata on Base for Alembic.
 
 from datetime import date, datetime
 
+from pgvector.sqlalchemy import Vector
 from sqlalchemy import Boolean, Date, DateTime, Integer, String, Text, func
 from sqlalchemy.dialects.postgresql import ARRAY, JSONB
 from sqlalchemy.orm import Mapped, mapped_column
@@ -87,3 +88,20 @@ class Post(Base):
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
+
+
+class DocChunk(Base):
+    """RAG retrieval chunks (Stage 5). One row per content chunk + its embedding."""
+
+    __tablename__ = "doc_chunks"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    source_type: Mapped[str] = mapped_column(String(20))  # project | post | profile
+    source_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    lang: Mapped[str] = mapped_column(String(5))  # en | zh
+    url: Mapped[str] = mapped_column(String(300))  # /projects/<slug>, /blog/<slug>, /
+    title: Mapped[str] = mapped_column(String(300))
+    chunk_index: Mapped[int] = mapped_column(Integer, default=0)
+    content: Mapped[str] = mapped_column(Text)
+    embedding: Mapped[list[float]] = mapped_column(Vector(768))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

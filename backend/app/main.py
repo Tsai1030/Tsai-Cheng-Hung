@@ -4,7 +4,7 @@ from sqlalchemy import text
 
 from .config import get_settings
 from .db import engine
-from .routers import posts, projects
+from .routers import chat, posts, projects
 
 settings = get_settings()
 
@@ -20,6 +20,7 @@ app.add_middleware(
 
 app.include_router(projects.router)
 app.include_router(posts.router)
+app.include_router(chat.router)
 
 
 @app.get("/health")

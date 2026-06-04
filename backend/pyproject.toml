@@ -10,6 +10,10 @@ dependencies = [
     "asyncpg>=0.30",
     "alembic>=1.14",
     "pydantic-settings>=2.6",
+    "langgraph>=1.2.4",
+    "langchain-core>=1.4.0",
+    "langchain-google-genai>=4.2.4",
+    "pgvector>=0.4.2",
 ]
 
 [tool.uv]
