@@ -276,10 +276,13 @@ footer .contact a svg { width: 17px; height: 17px; fill: currentColor; flex: non
   .gal-note { padding: 18px 22px 0; }
 }
 
-/* phones: the hero name is pinned at the clamp floor (3.2rem) below ~600px,
-   which overflows narrow screens — let it scale back down with the viewport */
+/* phones: hide the header wordmark so it stops squeezing the nav onto a 2nd line.
+   with the wordmark gone, anchor the (en) nav to the right; the shorter zh nav
+   reads better centered */
 @media (max-width: 600px) {
-  .hero h1 { font-size: clamp(2.5rem, 10vw, 3.2rem); }
+  .brand { display: none; }
+  .bar { justify-content: flex-end; }
+  html[data-lang="zh"] .bar { justify-content: center; }
 }
 
 /* ---------- RAG chat widget ---------- */
