@@ -24,6 +24,10 @@ export const metadata: Metadata = {
   title: "Tsai Cheng-Hung — AI Application & Frontend Engineer",
   description:
     "Tsai Cheng-Hung (蔡承紘) — AI Application & Frontend Engineer. RAG systems, agentic workflows, and the interfaces that bring them to life.",
+  icons: {
+    icon: [{ url: "/favicon.ico?v=20260604", type: "image/x-icon" }],
+    shortcut: [{ url: "/favicon.ico?v=20260604", type: "image/x-icon" }],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
