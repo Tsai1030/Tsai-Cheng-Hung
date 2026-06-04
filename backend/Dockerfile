@@ -13,4 +13,5 @@ COPY . .
 EXPOSE 8001
 
 # Render provides $PORT; default to 8001 locally.
-CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8001}"]
+# Run DB migrations on start, then launch the server.
+CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8001}"]

@@ -1,0 +1,26 @@
+# Render Blueprint for the FastAPI backend (deploys the backend/ folder via Docker).
+# Frontend deploys separately on Vercel (Root Directory = frontend).
+services:
+  - type: web
+    name: tsai-resume-api
+    runtime: docker
+    repo: https://github.com/Tsai1030/Tsai-Cheng-Hung
+    branch: master
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: singapore
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      # Fill these in the Render dashboard (Environment tab) — do NOT commit secrets.
+      - key: DATABASE_URL   # Supabase Session pooler (postgresql+asyncpg://...:5432/postgres)
+        sync: false
+      - key: DIRECT_URL     # same pooler URL (used by Alembic)
+        sync: false
+      - key: CORS_ORIGINS   # e.g. https://your-app.vercel.app  (set after Vercel deploy)
+        sync: false
+      - key: ADMIN_TOKEN
+        sync: false
