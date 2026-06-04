@@ -4,6 +4,7 @@ from sqlalchemy import text
 
 from .config import get_settings
 from .db import engine
+from .routers import posts, projects
 
 settings = get_settings()
 
@@ -16,6 +17,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(projects.router)
+app.include_router(posts.router)
 
 
 @app.get("/health")
@@ -32,9 +36,3 @@ async def health_db() -> dict[str, str]:
         return {"status": "ok", "db": "connected"}
     except Exception as exc:  # noqa: BLE001
         return {"status": "error", "db": str(exc)}
-
-
-# Stage 1 will register routers, e.g.:
-#   from .routers import projects, posts
-#   app.include_router(projects.router)
-#   app.include_router(posts.router)
