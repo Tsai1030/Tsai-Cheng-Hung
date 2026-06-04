@@ -36,9 +36,11 @@
 
 ```
 resume4/
-├── app/ components/ ...      # 既有 Next.js 前端（部署到 Vercel）
-├── lib/api.ts                # 新增：型別化 API client（讀 NEXT_PUBLIC_API_URL）
-└── backend/                  # 新增：Python 服務（部署到 Render）
+├── frontend/                 # Next.js 前端（部署到 Vercel；Vercel Root Directory = frontend）
+│   ├── app/                  # 頁面 + app/api/revalidate（on-demand ISR）
+│   ├── components/ lib/ public/
+│   └── package.json bun.lock tsconfig.json next.config.mjs .env.local
+└── backend/                  # Python 服務（部署到 Render）
     ├── app/
     │   ├── main.py           # FastAPI app + CORS
     │   ├── db.py             # async engine / session

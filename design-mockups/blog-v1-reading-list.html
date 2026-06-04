@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — V1 Reading List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Spectral:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet">
+<style>
+  :root{--deep:#937474;--middeep:#B39293;--mid:#D8C4C3;--light:#F3EBEA;--ink:#2E2424;
+    --serif:"Cormorant Garamond",serif;--body:"Spectral",serif}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--light);color:var(--ink);font-family:var(--body);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--middeep);color:var(--light)}
+  p,h1,h2,h3{text-wrap:pretty}
+
+  header{position:fixed;inset:0 0 auto 0;z-index:100;background:color-mix(in srgb,var(--light) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid color-mix(in srgb,var(--deep) 30%,transparent)}
+  .bar{max-width:1180px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--serif);font-size:1.4rem;font-weight:500}.brand span{color:var(--deep)}
+  nav{display:flex;align-items:center;gap:30px}
+  nav a{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+  nav a.active{color:var(--deep)}
+  .lang{font-size:.74rem;letter-spacing:.12em;border:1px solid var(--deep);color:var(--deep);padding:6px 13px;border-radius:30px}
+
+  .head{max-width:760px;margin:0 auto;padding:170px 40px 30px}
+  .eyebrow{font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--deep);margin-bottom:20px}
+  .head h1{font-family:var(--serif);font-weight:500;font-size:clamp(3rem,8vw,5.5rem);line-height:.95}
+  .head .intro{font-size:1.15rem;margin-top:20px;color:color-mix(in srgb,var(--ink) 80%,transparent)}
+
+  .feed{max-width:760px;margin:0 auto;padding:20px 40px 120px}
+  .post{display:block;text-decoration:none;color:inherit;padding:44px 0;border-top:1px solid color-mix(in srgb,var(--deep) 20%,transparent);transition:opacity .3s}
+  .post:hover h2{color:var(--deep)}
+  .meta{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--deep);display:flex;gap:14px;align-items:center}
+  .meta .dot{width:4px;height:4px;border-radius:50%;background:var(--mid)}
+  .post h2{font-family:var(--serif);font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:500;line-height:1.08;margin:14px 0 12px;transition:color .3s}
+  .post p{font-size:1.05rem;color:color-mix(in srgb,var(--ink) 80%,transparent);max-width:640px}
+  .tags{display:flex;gap:8px;margin-top:18px}
+  .tags span{font-size:.72rem;letter-spacing:.04em;color:var(--deep);border:1px solid color-mix(in srgb,var(--deep) 30%,transparent);padding:4px 11px;border-radius:30px}
+  .post .read{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+  .post .read .ar{font-family:var(--serif);font-size:1.2rem;color:var(--deep);transition:transform .3s}
+  .post:hover .read .ar{transform:translateX(5px)}
+
+  footer{max-width:760px;margin:0 auto;padding:0 40px 90px}
+  footer a{color:var(--deep);text-decoration:none;font-size:.84rem;letter-spacing:.16em;text-transform:uppercase}
+  @media(max-width:720px){.bar{padding:14px 22px}nav a:not(.active){display:none}.head,.feed,footer{padding-left:22px;padding-right:22px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <div class="brand">Tsai <span>Cheng-Hung</span></div>
+  <nav><a href="#">About</a><a href="#">Career</a><a href="#">Projects</a><a href="#" class="active">Blog</a><span class="lang">中文</span></nav>
+</div></header>
+
+<div class="head">
+  <div class="eyebrow">Writing</div>
+  <h1>Blog</h1>
+  <p class="intro">Notes on RAG, agents, and building AI products — what worked, what broke, and what I'd do differently.</p>
+</div>
+
+<div class="feed">
+  <a class="post" href="#"><div class="meta">Jun 4, 2026<span class="dot"></span>6 min read</div><h2>Building a RAG System End to End</h2><p>Notes from shipping a real RAG Q&amp;A system — chunking, embeddings, retrieval tuning, and the parts nobody warns you about.</p><div class="tags"><span>RAG</span><span>LLM</span><span>Notes</span></div><span class="read">Read <span class="ar">→</span></span></a>
+  <a class="post" href="#"><div class="meta">May 20, 2026<span class="dot"></span>5 min read</div><h2>Prompt → Persona: JSON Prompts that Don't Break the UI</h2><p>Designing structured prompts and guardrails so malformed model output never reaches the frontend.</p><div class="tags"><span>Prompt</span><span>Agents</span></div><span class="read">Read <span class="ar">→</span></span></a>
+  <a class="post" href="#"><div class="meta">Apr 28, 2026<span class="dot"></span>7 min read</div><h2>Tuning Retrieval: MMR, Rerank, and Knowing When to Stop</h2><p>How I moved from a single template to dynamic retrieval and measurably better answers.</p><div class="tags"><span>RAG</span><span>Retrieval</span></div><span class="read">Read <span class="ar">→</span></span></a>
+  <a class="post" href="#"><div class="meta">Mar 15, 2026<span class="dot"></span>8 min read</div><h2>LangGraph in Practice: Multi-Agent Flows that Ship</h2><p>Lessons from building multi-layer agents for a production consultation platform.</p><div class="tags"><span>Agents</span><span>LangGraph</span></div><span class="read">Read <span class="ar">→</span></span></a>
+  <a class="post" href="#"><div class="meta">Feb 10, 2026<span class="dot"></span>5 min read</div><h2>LoRA on a Budget: Fine-tuning with unsloth</h2><p>Fast, memory-efficient fine-tuning experiments and what actually moved the needle.</p><div class="tags"><span>Fine-tuning</span><span>PyTorch</span></div><span class="read">Read <span class="ar">→</span></span></a>
+</div>
+
+<footer><a href="#">← Back home</a></footer>
+</body>
+</html>

@@ -1,8 +1,4 @@
-/node_modules
-/.next/
-/out/
-/build
-*.log
+# Root-level ignores. frontend/ and backend/ each have their own .gitignore.
 .DS_Store
-.env*.local
-next-env.d.ts
+Thumbs.db
+*.log

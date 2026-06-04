@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog page — 5 versions</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Spectral:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{--deep:#937474;--middeep:#B39293;--mid:#D8C4C3;--light:#F3EBEA;--ink:#2E2424}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--light);color:var(--ink);font-family:"Spectral",serif;font-weight:300;padding:60px 30px 90px}
+  .wrap{max-width:1000px;margin:0 auto}
+  h1{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:2.8rem}
+  .sub{font-family:"Space Mono",monospace;font-size:.8rem;color:var(--deep);letter-spacing:.05em;margin:10px 0 36px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+  a.card{display:block;text-decoration:none;color:var(--ink);background:#fff;border:1px solid color-mix(in srgb,var(--deep) 22%,transparent);padding:26px;transition:transform .3s,box-shadow .3s}
+  a.card:hover{transform:translateY(-5px);box-shadow:0 22px 46px -28px rgba(46,36,36,.5)}
+  .n{font-family:"Space Mono",monospace;color:var(--deep);font-size:.8rem}
+  .card h2{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:1.5rem;margin:6px 0 8px}
+  .card p{font-size:.92rem;opacity:.82}
+  .note{margin-top:36px;font-size:.9rem;opacity:.72;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Blog 頁 — 5 種版本</h1>
+  <div class="sub">EDITORIAL · 主題色 · 偏閱讀導向（與 Projects 卡片風格刻意不同）</div>
+  <div class="grid">
+    <a class="card" href="blog-v1-reading-list.html"><div class="n">V1</div><h2>Reading List</h2><p>單欄閱讀清單：日期·分鐘、大標、摘要、tags、細線分隔。最像個人誌、最好讀。</p></a>
+    <a class="card" href="blog-v2-date-rail.html"><div class="n">V2</div><h2>Date Rail</h2><p>左側日期時間軸（圓點 rail）＋右側標題摘要。有編年、時間軸感。</p></a>
+    <a class="card" href="blog-v3-featured-lead.html"><div class="n">V3</div><h2>Featured Lead</h2><p>最新文章大版置頂，其餘為精簡兩行列。突出最新、其餘掃讀。</p></a>
+    <a class="card" href="blog-v4-numbered-notes.html"><div class="n">V4</div><h2>Numbered Notes</h2><p>編號筆記本：大編號＋標題＋日期＋摘要。標題用斜體 Notes，最有個人風格。</p></a>
+    <a class="card" href="blog-v5-tag-index.html"><div class="n">V5</div><h2>Tag Index</h2><p>頂部 tag 篩選列＋索引式表格（標題／Tags／日期）。最像可檢索的文章庫。</p></a>
+  </div>
+  <div class="note">這些是 Blog <b>列表頁</b>的方向探索；內文為示意（取材自你真實的技術主題，正式內容會由後端 <code>/posts</code> 提供）。選定後我會用 Next.js 實作 <code>/blog</code> 與 <code>/blog/[slug]</code>，並開啟 header 的 Blog 分頁。皆遵守 claude-design-x（無激進漸層 / 無 emoji / 無圓角左邊框卡片 / 無假 SVG 圖；偏排版與留白）。</div>
+</div>
+</body>
+</html>

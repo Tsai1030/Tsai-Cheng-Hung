@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — V2 Date Rail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Spectral:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet">
+<style>
+  :root{--deep:#937474;--middeep:#B39293;--mid:#D8C4C3;--light:#F3EBEA;--ink:#2E2424;
+    --serif:"Cormorant Garamond",serif;--body:"Spectral",serif}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--light);color:var(--ink);font-family:var(--body);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--middeep);color:var(--light)}
+  p,h1,h2,h3{text-wrap:pretty}
+
+  header{position:fixed;inset:0 0 auto 0;z-index:100;background:color-mix(in srgb,var(--light) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid color-mix(in srgb,var(--deep) 30%,transparent)}
+  .bar{max-width:1080px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--serif);font-size:1.4rem;font-weight:500}.brand span{color:var(--deep)}
+  nav{display:flex;align-items:center;gap:30px}
+  nav a{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+  nav a.active{color:var(--deep)}
+  .lang{font-size:.74rem;letter-spacing:.12em;border:1px solid var(--deep);color:var(--deep);padding:6px 13px;border-radius:30px}
+
+  .head{max-width:1080px;margin:0 auto;padding:170px 40px 30px}
+  .eyebrow{font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--deep);margin-bottom:18px}
+  .head h1{font-family:var(--serif);font-weight:500;font-size:clamp(3rem,8vw,5.5rem);line-height:.95}
+
+  .feed{max-width:1080px;margin:0 auto;padding:24px 40px 120px}
+  .post{display:grid;grid-template-columns:150px 1fr;gap:40px;text-decoration:none;color:inherit;padding:38px 0;border-top:1px solid color-mix(in srgb,var(--deep) 20%,transparent);align-items:start}
+  .post:hover h2{color:var(--deep)}
+  .rail{position:relative;padding-left:22px}
+  .rail::before{content:"";position:absolute;left:0;top:6px;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--deep);background:var(--light)}
+  .post:hover .rail::before{background:var(--deep)}
+  .rail .d{font-family:var(--serif);font-size:1.5rem;color:var(--ink);line-height:1.1}
+  .rail .y{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--deep);margin-top:4px}
+  .rail .rt{font-size:.74rem;color:var(--deep);margin-top:10px}
+  .post h2{font-family:var(--serif);font-size:clamp(1.7rem,3vw,2.3rem);font-weight:500;line-height:1.1;margin-bottom:10px;transition:color .3s}
+  .post p{font-size:1.02rem;color:color-mix(in srgb,var(--ink) 80%,transparent);max-width:620px}
+  .tags{display:flex;gap:8px;margin-top:16px}
+  .tags span{font-size:.72rem;color:var(--deep);border:1px solid color-mix(in srgb,var(--deep) 30%,transparent);padding:4px 11px;border-radius:30px}
+
+  footer{max-width:1080px;margin:0 auto;padding:0 40px 90px}
+  footer a{color:var(--deep);text-decoration:none;font-size:.84rem;letter-spacing:.16em;text-transform:uppercase}
+  @media(max-width:720px){.post{grid-template-columns:1fr;gap:10px}.rail{padding-left:0;display:flex;gap:12px;align-items:baseline}.rail::before{display:none}.bar{padding:14px 22px}nav a:not(.active){display:none}.head,.feed,footer{padding-left:22px;padding-right:22px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <div class="brand">Tsai <span>Cheng-Hung</span></div>
+  <nav><a href="#">About</a><a href="#">Career</a><a href="#">Projects</a><a href="#" class="active">Blog</a><span class="lang">中文</span></nav>
+</div></header>
+
+<div class="head"><div class="eyebrow">Writing</div><h1>Blog</h1></div>
+
+<div class="feed">
+  <a class="post" href="#"><div class="rail"><div class="d">Jun 4</div><div class="y">2026</div><div class="rt">6 min</div></div><div><h2>Building a RAG System End to End</h2><p>Notes from shipping a real RAG Q&amp;A system — chunking, embeddings, retrieval tuning, and the parts nobody warns you about.</p><div class="tags"><span>RAG</span><span>LLM</span><span>Notes</span></div></div></a>
+  <a class="post" href="#"><div class="rail"><div class="d">May 20</div><div class="y">2026</div><div class="rt">5 min</div></div><div><h2>Prompt → Persona: JSON Prompts that Don't Break the UI</h2><p>Designing structured prompts and guardrails so malformed model output never reaches the frontend.</p><div class="tags"><span>Prompt</span><span>Agents</span></div></div></a>
+  <a class="post" href="#"><div class="rail"><div class="d">Apr 28</div><div class="y">2026</div><div class="rt">7 min</div></div><div><h2>Tuning Retrieval: MMR, Rerank, and Knowing When to Stop</h2><p>How I moved from a single template to dynamic retrieval and measurably better answers.</p><div class="tags"><span>RAG</span><span>Retrieval</span></div></div></a>
+  <a class="post" href="#"><div class="rail"><div class="d">Mar 15</div><div class="y">2026</div><div class="rt">8 min</div></div><div><h2>LangGraph in Practice: Multi-Agent Flows that Ship</h2><p>Lessons from building multi-layer agents for a production consultation platform.</p><div class="tags"><span>Agents</span><span>LangGraph</span></div></div></a>
+  <a class="post" href="#"><div class="rail"><div class="d">Feb 10</div><div class="y">2026</div><div class="rt">5 min</div></div><div><h2>LoRA on a Budget: Fine-tuning with unsloth</h2><p>Fast, memory-efficient fine-tuning experiments and what actually moved the needle.</p><div class="tags"><span>Fine-tuning</span><span>PyTorch</span></div></div></a>
+</div>
+
+<footer><a href="#">← Back home</a></footer>
+</body>
+</html>
