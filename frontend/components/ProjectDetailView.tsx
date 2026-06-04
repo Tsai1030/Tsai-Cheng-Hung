@@ -29,6 +29,10 @@ export default function ProjectDetailView({ project: p }: { project: ProjectDeta
   const { lang } = useLang();
   const t = <T,>(en: T, zh: T) => (lang === "en" ? en : zh);
   const ytId = p.video_url ? youtubeId(p.video_url) : null;
+  // Show the cover on the detail page only when the project has no other media
+  // (no video and no image embedded in the body) — otherwise it's redundant.
+  const bodyHasImage = /!\[[^\]]*\]\([^)]*\)/.test(p.body_en) || /!\[[^\]]*\]\([^)]*\)/.test(p.body_zh);
+  const showCover = Boolean(p.cover_image) && !ytId && !bodyHasImage;
 
   return (
     <div className="pd-wrap">
@@ -75,10 +79,10 @@ export default function ProjectDetailView({ project: p }: { project: ProjectDeta
         </div>
       )}
 
-      {p.cover_image && (
+      {showCover && (
         <div className="pd-cover">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={p.cover_image} alt="" />
+          <img src={p.cover_image ?? ""} alt="" />
         </div>
       )}
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLang, L } from "./LangContext";
 
@@ -25,14 +26,14 @@ export default function Header() {
   return (
     <header className={cls}>
       <div className="bar">
-        <div className="brand">
+        <Link href="/" className="brand">
           Tsai <span>Cheng-Hung</span>
-        </div>
+        </Link>
         <nav>
           <a href="/#about"><L en="About" zh="關於" /></a>
           <a href="/#career"><L en="Career" zh="職涯" /></a>
-          <a href="/#projects"><L en="Projects" zh="專案" /></a>
-          <a href="/blog"><L en="Blog" zh="部落格" /></a>
+          <Link href="/projects"><L en="Projects" zh="專案" /></Link>
+          <Link href="/blog"><L en="Blog" zh="部落格" /></Link>
           <button className="lang" onClick={toggle}>{lang === "en" ? "中文" : "EN"}</button>
         </nav>
       </div>

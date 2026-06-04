@@ -95,7 +95,7 @@ export function Experience() {
           <div className="xp-item">
             <div className="xp-date">2025.03 — 2025.06</div>
             <div>
-              <h3><L en="Teaching Assistant — Generative AI" zh="助教 — 生成式 AI" /></h3>
+              <h3><L en="Teaching Assistant — Generative AI" zh="臺灣大專院校人工智慧學程聯盟助教 — 生成式 AI" /></h3>
               <div className="org"><L en="Kaohsiung Medical University" zh="高雄醫學大學" /></div>
               <p>
                 <L

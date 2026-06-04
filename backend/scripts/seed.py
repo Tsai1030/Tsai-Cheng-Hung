@@ -86,6 +86,7 @@ PROJECTS: list[dict] = [
             "Gemini Grounded Search", "OpenAI Embeddings", "SQLAlchemy", "python-docx", "Next.js", "TypeScript",
         ],
         "links": {"github": "https://github.com/Tsai1030/LangGraph_RAG_SYSTEM", "demo": "https://kccc3798.tail138ec9.ts.net/"},
+        "cover_image": "/Construction%20Knowledge%20RAG.png",
         "video_url": "https://youtu.be/OpPr688_f8M",
         "period": "2025–",
         "role_en": "Solo developer",
@@ -95,6 +96,7 @@ PROJECTS: list[dict] = [
     },
     {
         "slug": "eastern-mysticism",
+        "cover_image": "/Eastern%20Mysticism%20Platform%20COVERIMG.png",
         "title_en": "Eastern Mysticism Platform",
         "title_zh": "東方命理平台",
         "summary_en": "Multi-agent consultation platform with SSE streaming and a custom Zi-Wei chart engine.",
@@ -132,6 +134,7 @@ PROJECTS: list[dict] = [
     },
     {
         "slug": "multimodal-rag-knowledge-base",
+        "cover_image": "/Multi-modal%20RAG%20Knowledge%20Base%20Platform.png",
         "title_en": "Multi-modal RAG Knowledge Base Platform",
         "title_zh": "多模態 RAG 知識庫平台",
         "summary_en": "A production-grade, fully containerized multi-modal RAG platform with real-time SSE streaming, multi-turn conversation compaction, session-scoped retrieval, and an admin console — all running locally via Docker Compose.",
@@ -198,6 +201,7 @@ PROJECTS: list[dict] = [
     },
     {
         "slug": "ziwei-multi-agent-langgraph",
+        "cover_image": "/Ziwei%20Doushu%20Multi-Agent%20AI%20%28LangGraph%20ReAct%29.png",
         "title_en": "Ziwei Doushu Multi-Agent AI (LangGraph ReAct)",
         "title_zh": "紫微斗數 Multi-Agent AI 系統（LangGraph ReAct）",
         "summary_en": "A Graph-based multi-agent fortune-telling system using a LangGraph ReAct loop, a custom Python MCP server, ChromaDB RAG, and web search.",
@@ -250,6 +254,7 @@ PROJECTS: list[dict] = [
     },
     {
         "slug": "rag-air-pollution",
+        "cover_image": "/RAG%20Air-Pollution.png",
         "title_en": "RAG Air-Pollution Q&A",
         "title_zh": "RAG 空污問答系統",
         "summary_en": "My Master's thesis system — deployed publicly via DuckDNS + Nginx with HTTPS.",
@@ -288,6 +293,7 @@ PROJECTS: list[dict] = [
     },
     {
         "slug": "unsloth-lora-finetune",
+        "cover_image": "/Unsloth%20LoRA%20Fine-tuning%20System.png",
         "title_en": "Unsloth LoRA Fine-tuning System",
         "title_zh": "Unsloth LoRA 微調系統",
         "summary_en": "A modular LoRA fine-tuning pipeline built on Unsloth for sentiment analysis, with 4-bit quantization, early stopping, and adaptive Llama-2/Llama-3 support.",
@@ -334,6 +340,7 @@ PROJECTS: list[dict] = [
     },
     {
         "slug": "graphify-atlas-knowledge-workspace",
+        "cover_image": "/Graphify%20Atlas%20%E2%80%94%20Graph-Powered%20Knowledge%20Workspace.png",
         "title_en": "Graphify Atlas — Graph-Powered Knowledge Workspace",
         "title_zh": "Graphify Atlas — 圖譜知識工作台",
         "summary_en": "A cinematic, graph-backed knowledge workspace that turns a private Markdown corpus into a queryable knowledge graph with conversational retrieval, evidence inspection, and Obsidian browsing.",
@@ -393,39 +400,79 @@ PROJECTS: list[dict] = [
 
 POSTS: list[dict] = [
     {
-        "slug": "building-a-rag-system-end-to-end",
-        "title_en": "Building a RAG System End to End",
-        "title_zh": "從零打造一套 RAG 系統",
-        "excerpt_en": "Notes from shipping a real RAG Q&A system — chunking, embeddings, retrieval tuning, and the parts nobody warns you about.",
-        "excerpt_zh": "把一套真正能用的 RAG 問答系統做上線的筆記——切塊、嵌入、檢索調校，以及那些沒人提醒你的細節。",
+        "slug": "why-i-built-this-site",
+        "title_en": "Why I Built This Site (and How It Works)",
+        "title_zh": "我為什麼打造這個網站（以及它怎麼運作）",
+        "excerpt_en": "The story behind this site — a home for my résumé, projects, and a running log of what I'm learning — plus a quick look at the stack, the data model, and why I chose this architecture.",
+        "excerpt_zh": "這個網站的緣起——一個放我的履歷、專案，以及持續記錄學習點滴的地方——順便聊聊技術棧、資料庫結構，以及我為什麼這樣選架構。",
         "body_en": (
-            "Retrieval-Augmented Generation looks simple on a slide: embed your docs, search, stuff the "
-            "context into a prompt. Shipping one taught me the gap is in the details.\n\n"
-            "## 1. Chunking matters more than the model\n\n"
-            "Recursive, punctuation-aware splitting kept semantics intact and beat naive fixed-size chunks "
-            "on retrieval quality.\n\n"
-            "## 2. Metadata is half the system\n\n"
-            "Tagging each chunk with source, page, and topic let me filter before similarity search — "
-            "fewer, better candidates.\n\n"
-            "## 3. MMR + reranking\n\n"
-            "Maximal Marginal Relevance balanced relevance with coverage; a rerank pass cleaned up the top-k.\n\n"
-            "## 4. Guardrails for the UI\n\n"
-            "LLM output isn't always valid — a formatter + graceful fallbacks kept the frontend from breaking "
-            "when a field was missing.\n"
+            "## Why I built this\n\n"
+            "I wanted one place that's truly mine — not just a static résumé, but somewhere I can keep "
+            "adding to: projects I ship, things I learn, and the occasional reflection. This blog is where "
+            "I'll record the day-to-day — what I'm building, what broke, and what I'd do differently. "
+            "Think of it as a running log rather than a finished portfolio.\n\n"
+            "## What it runs on\n\n"
+            "The site is split into a frontend and a backend:\n\n"
+            "- **Frontend** — Next.js (App Router) + TypeScript + Tailwind CSS, deployed on Vercel. "
+            "It's bilingual (EN / 中) with a language toggle, renders Markdown content, and uses ISR so "
+            "pages stay fast and fresh.\n"
+            "- **Backend** — FastAPI + SQLAlchemy (async) + Alembic, managed with uv. It owns all the data "
+            "and serves a small JSON API the frontend calls — and it's where a RAG chat assistant will live, soon.\n"
+            "- **Database** — Supabase (PostgreSQL) with the pgvector extension.\n\n"
+            "## The data model (a peek)\n\n"
+            "Everything you see is data, not hardcoded:\n\n"
+            "- **projects** — bilingual title / summary / body (Markdown), a tech list, links (JSON), an "
+            "optional demo video, GitHub stars / forks, and a date used to order newest-first.\n"
+            "- **posts** — bilingual title / excerpt / body, tags, and reading time. This very post is a row "
+            "in that table.\n"
+            "- **doc_chunks** (reserved) — a pgvector table for embeddings, ready for the chat assistant I'm "
+            "building next.\n\n"
+            "## Why this architecture\n\n"
+            "A few deliberate choices:\n\n"
+            "- **A separate Python backend.** Python is my home turf (FastAPI, SQLAlchemy), and the assistant "
+            "I want to add next — retrieval-augmented Q&A — is most natural there. A clean API boundary keeps "
+            "the frontend simple.\n"
+            "- **Next.js on Vercel.** Great developer experience, server rendering + ISR for speed and SEO, "
+            "and effortless deploys.\n"
+            "- **Supabase + pgvector.** One database for both the content and the future embeddings — fewer "
+            "moving parts to maintain.\n"
+            "- **Content as data.** Storing projects and posts in the DB (instead of hardcoding them) lets me "
+            "add or edit things without redeploying, and bilingual content is just two columns.\n\n"
+            "## What's next\n\n"
+            "I'll keep writing here as I go. The next big piece is an AI assistant that can answer questions "
+            "about me and link you straight to the relevant project or post. More soon.\n"
         ),
         "body_zh": (
-            "RAG 在投影片上看起來很簡單：把文件嵌入、檢索、把內容塞進 prompt。真正做上線後，我才發現魔鬼都在細節裡。\n\n"
-            "## 1. 切塊比模型更關鍵\n\n"
-            "遞迴、考慮標點的切割能保留語意，檢索品質明顯優於單純的固定長度切塊。\n\n"
-            "## 2. Metadata 是系統的一半\n\n"
-            "為每個 chunk 標上來源、頁碼、主題，就能在相似度搜尋前先過濾——候選更少、更準。\n\n"
-            "## 3. MMR + Reranking\n\n"
-            "以 Maximal Marginal Relevance 平衡相關性與覆蓋度，再加一段 rerank 把 top-k 清乾淨。\n\n"
-            "## 4. 給前端的防護機制\n\n"
-            "LLM 輸出不一定合法——加一層 formatter 與優雅的 fallback，讓欄位缺漏時前端也不會壞掉。\n"
+            "## 為什麼做這個網站\n\n"
+            "我想要一個真正屬於自己的地方——不只是一份靜態履歷，而是一個能持續往上加東西的空間：我做的專案、"
+            "學到的東西，偶爾還有一些心得。這個部落格就是我用來記錄點點滴滴的地方：在做什麼、卡在哪、之後會怎麼改。"
+            "與其說是完成的作品集，不如說是一份持續更新的紀錄。\n\n"
+            "## 目前用什麼做的\n\n"
+            "網站分成前端與後端：\n\n"
+            "- **前端** — Next.js（App Router）+ TypeScript + Tailwind CSS，部署在 Vercel。支援中英切換、"
+            "以 Markdown 呈現內容，並用 ISR 讓頁面又快又新。\n"
+            "- **後端** — FastAPI + SQLAlchemy（async）+ Alembic，用 uv 管理。它掌管所有資料、提供一組小巧的 "
+            "JSON API 給前端呼叫——之後的 RAG 聊天助手也會放在這裡。\n"
+            "- **資料庫** — Supabase（PostgreSQL）＋ pgvector 擴充。\n\n"
+            "## 資料庫結構（小小揭露）\n\n"
+            "你看到的一切都是「資料」，不是寫死的：\n\n"
+            "- **projects** — 雙語的標題／摘要／內文（Markdown）、技術清單、連結（JSON）、可選的示範影片、"
+            "GitHub 星數／fork 數，以及一個用來「由新到舊」排序的日期。\n"
+            "- **posts** — 雙語的標題／摘要／內文、tags、閱讀時間。你正在看的這篇，就是這張表裡的一筆資料。\n"
+            "- **doc_chunks**（保留）— 一張 pgvector 向量表，為我接下來要做的聊天助手預留。\n\n"
+            "## 為什麼選這樣的架構\n\n"
+            "幾個刻意的選擇：\n\n"
+            "- **獨立的 Python 後端。** Python 是我最熟的主場（FastAPI、SQLAlchemy），而我接下來想加的助手——"
+            "檢索增強的問答——在 Python 生態最自然。清楚的 API 邊界也讓前端保持單純。\n"
+            "- **Next.js + Vercel。** 開發體驗好、有 SSR + ISR 兼顧速度與 SEO，部署也很省事。\n"
+            "- **Supabase + pgvector。** 同一個資料庫同時放內容與未來的向量，要維護的東西更少。\n"
+            "- **內容即資料。** 把專案與文章存在資料庫（而不是寫死），不重新部署也能新增／修改，雙語也只是多兩個欄位。\n\n"
+            "## 接下來\n\n"
+            "我會邊做邊持續在這裡寫；下一個大工程是一個 AI 助手，能回答關於我的問題、並直接帶你連到對應的專案或文章。"
+            "敬請期待。\n"
         ),
-        "tags": ["RAG", "LLM", "Notes"],
-        "reading_minutes": 6,
+        "tags": ["Meta", "Architecture", "Notes"],
+        "reading_minutes": 5,
         "published": True,
         "published_at": datetime.now(timezone.utc),
     },

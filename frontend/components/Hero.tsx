@@ -39,7 +39,7 @@ export default function Hero() {
       <div className="photo-card">
         <span className="tape"><L en="Portrait" zh="個人照" /></span>
         <div className="frame">
-          <img src="/cnc.png" alt="Tsai Cheng-Hung portrait placeholder" />
+          <img src="/about.jpg" alt="Tsai Cheng-Hung" />
           <div className="cap">
             <span>Tsai Cheng-Hung</span>
             <span>2026</span>

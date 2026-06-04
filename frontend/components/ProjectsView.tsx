@@ -57,10 +57,12 @@ export default function ProjectsView({
           <h1>{t("Projects", "專案")}</h1>
         </div>
         <p className="pj-intro">
-          {t(
-            "Systems I've shipped — RAG pipelines, autonomous agents, and fully local knowledge bases.",
-            "我做上線過的系統——RAG 流程、自主代理，以及完全本地的知識庫。"
-          )}
+          {t("Jotting down the little moments", "紀錄點點滴滴")}
+          <span className="pj-dots" aria-hidden="true">
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+          </span>
         </p>
       </div>
 

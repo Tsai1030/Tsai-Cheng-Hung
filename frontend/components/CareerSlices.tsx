@@ -4,11 +4,12 @@ import { useEffect, useRef } from "react";
 import { L } from "./LangContext";
 
 type Bi = { en: string; zh: string };
-type Card = { img: string; badge: Bi; role: Bi; org: Bi | string; desc: Bi };
+type Card = { img: string; badge: Bi; role: Bi; org: Bi | string; desc: Bi; pos?: string };
 
 const cards: Card[] = [
   {
-    img: "/cnc.png",
+    img: "/life.jpg",
+    pos: "left 25%",
     badge: { en: "Profile", zh: "個人" },
     role: { en: "Portrait", zh: "個人照片" },
     org: "蔡承紘 · Tsai Cheng-Hung",
@@ -117,7 +118,7 @@ export default function CareerSlices() {
               <article className="cs-card" key={i}>
                 <div className="ph">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={c.img} alt="" />
+                  <img src={c.img} alt="" style={c.pos ? { objectPosition: c.pos } : undefined} />
                   <span className="badge"><L {...c.badge} /></span>
                   <div className="role">
                     <h3><L {...c.role} /></h3>

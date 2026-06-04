@@ -160,6 +160,12 @@ footer .contact a svg { width: 17px; height: 17px; fill: currentColor; flex: non
 .pj-eyebrow { font-size: .78rem; letter-spacing: .32em; text-transform: uppercase; color: var(--deep); margin-bottom: 18px; }
 .pj-wrap h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(3rem, 8vw, 6.5rem); line-height: .95; }
 .pj-intro { max-width: 380px; font-size: 1.05rem; color: color-mix(in srgb, var(--ink) 82%, transparent); }
+.pj-dots { display: inline-block; letter-spacing: .45em; margin-left: .3em; }
+.pj-dots span { animation: pjDot 1.4s ease-in-out infinite both; }
+.pj-dots span:nth-child(2) { animation-delay: .18s; }
+.pj-dots span:nth-child(3) { animation-delay: .36s; }
+@keyframes pjDot { 0%, 70%, 100% { opacity: .2; } 35% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .pj-dots span { animation: none; opacity: .55; } }
 .pj-grid { max-width: 1280px; margin: 0 auto; padding: 24px 40px 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
 .pj-card { text-decoration: none; color: inherit; border: 1px solid color-mix(in srgb, var(--deep) 24%, transparent); background: #fff; display: flex; flex-direction: column; transition: transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s; }
 .pj-card:hover { transform: translateY(-8px); box-shadow: 0 34px 70px -34px rgba(46,36,36,.5); }
