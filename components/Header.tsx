@@ -29,9 +29,9 @@ export default function Header() {
           Tsai <span>Cheng-Hung</span>
         </div>
         <nav>
-          <a href="#about"><L en="About" zh="關於" /></a>
-          <a href="#career"><L en="Career" zh="職涯" /></a>
-          <a href="#projects"><L en="Projects" zh="專案" /></a>
+          <a href="/#about"><L en="About" zh="關於" /></a>
+          <a href="/#career"><L en="Career" zh="職涯" /></a>
+          <a href="/#projects"><L en="Projects" zh="專案" /></a>
           <a href="#" className="disabled"><L en="Blog" zh="部落格" /></a>
           <button className="lang" onClick={toggle}>{lang === "en" ? "中文" : "EN"}</button>
         </nav>

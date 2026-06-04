@@ -1,28 +1,36 @@
-"use client";
+import Header from "@/components/Header";
+import ProjectsView from "@/components/ProjectsView";
+import { getProjects } from "@/lib/api";
 
-import Link from "next/link";
-import { L } from "@/components/LangContext";
+export const revalidate = 300;
 
-export default function ProjectsPage() {
+const PAGE_SIZE = 6;
+
+export const metadata = {
+  title: "Projects — Tsai Cheng-Hung",
+  description: "Selected work — RAG systems, autonomous agents, and fully local knowledge bases.",
+};
+
+export default async function ProjectsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const sp = await searchParams;
+  const all = await getProjects();
+
+  const total = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
+  let page = Number.parseInt(sp.page ?? "1", 10);
+  if (Number.isNaN(page) || page < 1) page = 1;
+  if (page > total) page = total;
+
+  const start = (page - 1) * PAGE_SIZE;
+  const items = all.slice(start, start + PAGE_SIZE);
+
   return (
-    <main style={{ minHeight: "100vh", display: "grid", placeItems: "center", padding: "60px 24px", textAlign: "center" }}>
-      <div>
-        <div style={{ fontSize: ".8rem", letterSpacing: ".32em", textTransform: "uppercase", color: "var(--deep)", marginBottom: "22px" }}>
-          <L en="Projects" zh="專案" />
-        </div>
-        <h1 style={{ fontFamily: "var(--serif)", fontSize: "clamp(2.6rem, 8vw, 5.5rem)", fontWeight: 500, lineHeight: 1 }}>
-          <L en="Coming soon." zh="即將推出。" />
-        </h1>
-        <p style={{ marginTop: "18px", fontSize: "1.05rem" }}>
-          <L en="Detailed project write-ups are on the way." zh="完整的專案介紹即將上線。" />
-        </p>
-        <Link
-          href="/"
-          style={{ display: "inline-block", marginTop: "34px", color: "var(--deep)", textDecoration: "none", borderBottom: "1px solid var(--deep)", paddingBottom: "3px" }}
-        >
-          <L en="← Back home" zh="← 返回首頁" />
-        </Link>
-      </div>
-    </main>
+    <>
+      <Header />
+      <ProjectsView items={items} startIndex={start} current={page} total={total} />
+    </>
   );
 }

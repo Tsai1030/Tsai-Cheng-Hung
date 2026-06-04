@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — V5 Sticky (About-consistent)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Spectral:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet">
+<style>
+  :root{--deep:#937474;--middeep:#B39293;--mid:#D8C4C3;--light:#F3EBEA;--ink:#2E2424;
+    --serif:"Cormorant Garamond",serif;--body:"Spectral",serif}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--light);color:var(--ink);font-family:var(--body);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--middeep);color:var(--light)}
+  p,h1,h2,h3{text-wrap:pretty}
+
+  header{position:fixed;inset:0 0 auto 0;z-index:100;background:color-mix(in srgb,var(--light) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid color-mix(in srgb,var(--deep) 30%,transparent)}
+  .bar{max-width:1280px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--serif);font-size:1.4rem;font-weight:500}.brand span{color:var(--deep)}
+  nav{display:flex;align-items:center;gap:30px}
+  nav a{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+  nav a.active{color:var(--deep)}
+  .lang{font-size:.74rem;letter-spacing:.12em;border:1px solid var(--deep);color:var(--deep);padding:6px 13px;border-radius:30px}
+
+  section{max-width:1280px;margin:0 auto;padding:160px 40px 120px}
+  .layout{display:grid;grid-template-columns:300px 1fr;gap:60px}
+  .sticky-label{position:sticky;top:130px;align-self:start}
+  .sticky-label .num{font-family:var(--serif);font-size:5rem;line-height:1;color:var(--mid)}
+  .sticky-label h2{font-family:var(--serif);font-size:2.4rem;font-weight:500;margin-top:8px}
+  .sticky-label .tag{font-size:.78rem;letter-spacing:.1em;color:var(--deep);margin-top:14px;max-width:220px}
+  .sticky-label .count{margin-top:26px;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--deep);border-top:1px solid color-mix(in srgb,var(--deep) 25%,transparent);padding-top:14px}
+
+  .proj{display:flex;flex-direction:column}
+  .item{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:baseline;padding:34px 0;border-bottom:1px solid color-mix(in srgb,var(--deep) 16%,transparent);
+    text-decoration:none;color:inherit;transition:background .35s,padding .35s}
+  .item:first-child{padding-top:0}
+  .item:hover{background:color-mix(in srgb,var(--mid) 38%,transparent);padding-left:20px;padding-right:20px}
+  .item .t{display:flex;align-items:baseline;gap:14px}
+  .item h3{font-family:var(--serif);font-size:2rem;font-weight:500;line-height:1.05}
+  .item .fe{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--deep)}
+  .item .sum{font-size:.98rem;max-width:560px;margin-top:8px;color:color-mix(in srgb,var(--ink) 80%,transparent)}
+  .item .tech{font-size:.8rem;letter-spacing:.03em;color:var(--deep);margin-top:12px}
+  .item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+  .item .yr{font-size:.82rem;color:var(--deep)}
+  .item .arr{font-family:var(--serif);font-size:1.9rem;color:var(--deep);transition:transform .35s}
+  .item:hover .arr{transform:translate(5px,-5px)}
+
+  @media(max-width:880px){.layout{grid-template-columns:1fr;gap:24px}.sticky-label{position:static}.item{grid-template-columns:1fr}.item .right{flex-direction:row;justify-content:space-between;align-items:center}.bar{padding:14px 22px}nav a:not(.active){display:none}section{padding:130px 22px 80px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <div class="brand">Tsai <span>Cheng-Hung</span></div>
+  <nav><a href="#">About</a><a href="#">Career</a><a href="#" class="active">Projects</a><a href="#">Blog</a><span class="lang">中文</span></nav>
+</div></header>
+
+<section>
+  <div class="layout">
+    <div class="sticky-label">
+      <div class="num">05</div>
+      <h2>Selected Work</h2>
+      <p class="tag">Systems shipped, not just demoed.</p>
+      <div class="count">06 projects · 2024 – 26</div>
+    </div>
+    <div class="proj">
+      <a class="item" href="#"><div><div class="t"><h3>Eastern Mysticism Platform</h3><span class="fe">★ Featured</span></div><div class="sum">Multi-agent consultation platform with SSE streaming and a custom Zi-Wei chart engine.</div><div class="tech">LangGraph · GPT-4o · Quart · Pinecone · Next.js 15 · Three.js</div></div><div class="right"><span class="yr">2025 –</span><span class="arr">↗</span></div></a>
+      <a class="item" href="#"><div><div class="t"><h3>Multi-modal AI Knowledge Base</h3><span class="fe">★ Featured</span></div><div class="sum">Fully local RAG platform: upload PDFs &amp; images, parse, index, and chat — data never leaves the box.</div><div class="tech">FastAPI · ChromaDB · MinerU · Next.js 16 · Ollama · Docker</div></div><div class="right"><span class="yr">2026 –</span><span class="arr">↗</span></div></a>
+      <a class="item" href="#"><div><div class="t"><h3>RAG Air-Pollution Q&amp;A</h3><span class="fe">★ Featured</span></div><div class="sum">My Master's thesis system — deployed publicly via DuckDNS + Nginx with HTTPS.</div><div class="tech">bge-m3 · Gemma 3:12B · LangChain · FastAPI · RAGAS</div></div><div class="right"><span class="yr">2024 – 25</span><span class="arr">↗</span></div></a>
+      <a class="item" href="#"><div><div class="t"><h3>RAG Medical Q&amp;A (ReAct)</h3><span class="fe">★ Featured</span></div><div class="sum">A ReAct agent that chooses between a local doctor database and live web search per question.</div><div class="tech">ReAct · GPT-4o · Google Serper · LangChain</div></div><div class="right"><span class="yr">2024 –</span><span class="arr">↗</span></div></a>
+      <a class="item" href="#"><div><div class="t"><h3>CrewAI Multi-Agent — Zi Wei</h3></div><div class="sum">A multi-agent Zi-Wei analysis system built on CrewAI with a RAG knowledge base.</div><div class="tech">CrewAI · Multi-Agent · RAG · Python</div></div><div class="right"><span class="yr">2025</span><span class="arr">↗</span></div></a>
+      <a class="item" href="#"><div><div class="t"><h3>unsloth — LoRA Fine-tuning</h3></div><div class="sum">Efficient LoRA / PEFT fine-tuning experiments for domain-specific LLM behaviour.</div><div class="tech">unsloth · LoRA · PEFT · PyTorch · Hugging Face</div></div><div class="right"><span class="yr">2025</span><span class="arr">↗</span></div></a>
+    </div>
+  </div>
+</section>
+</body>
+</html>

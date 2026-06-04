@@ -202,6 +202,29 @@ PROJECTS: list[dict] = [
         "featured": False,
         "sort": 6,
     },
+    {
+        "slug": "claudemcp-crewai-rag",
+        "title_en": "ClaudeMCP · CrewAI + RAG",
+        "title_zh": "ClaudeMCP · CrewAI + RAG",
+        "summary_en": "Orchestrating CrewAI agents over a RAG knowledge base through Claude's Model Context Protocol.",
+        "summary_zh": "透過 Claude 的 Model Context Protocol 串接 CrewAI 多代理，並結合 RAG 知識庫。",
+        "body_en": (
+            "## Overview\n\n"
+            "An experiment wiring **Claude MCP** to CrewAI agents, letting tools and a RAG knowledge "
+            "base be exposed through the Model Context Protocol.\n"
+        ),
+        "body_zh": (
+            "## 專案概述\n\n"
+            "把 **Claude MCP** 接上 CrewAI 多代理的實驗：讓工具與 RAG 知識庫透過 Model Context Protocol 對外提供。\n"
+        ),
+        "tech": ["Claude MCP", "CrewAI", "RAG", "Python"],
+        "links": {"github": "https://github.com/Tsai1030/ClaudeMCP-Crewai-RAG"},
+        "period": "2025",
+        "role_en": "Solo developer",
+        "role_zh": "獨立開發",
+        "featured": False,
+        "sort": 7,
+    },
 ]
 
 POSTS: list[dict] = [

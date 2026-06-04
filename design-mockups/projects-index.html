@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects page — 5 versions</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Spectral:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{--deep:#937474;--middeep:#B39293;--mid:#D8C4C3;--light:#F3EBEA;--ink:#2E2424}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--light);color:var(--ink);font-family:"Spectral",serif;font-weight:300;padding:60px 30px 90px}
+  .wrap{max-width:1000px;margin:0 auto}
+  h1{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:2.8rem}
+  .sub{font-family:"Space Mono",monospace;font-size:.8rem;color:var(--deep);letter-spacing:.05em;margin:10px 0 36px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+  a.card{display:block;text-decoration:none;color:var(--ink);background:#fff;border:1px solid color-mix(in srgb,var(--deep) 22%,transparent);padding:26px;transition:transform .3s,box-shadow .3s}
+  a.card:hover{transform:translateY(-5px);box-shadow:0 22px 46px -28px rgba(46,36,36,.5)}
+  .n{font-family:"Space Mono",monospace;color:var(--deep);font-size:.8rem}
+  .card h2{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:1.5rem;margin:6px 0 8px}
+  .card p{font-size:.92rem;opacity:.82}
+  .note{margin-top:36px;font-size:.9rem;opacity:.72;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Projects 頁 — 5 種版本</h1>
+  <div class="sub">EDITORIAL · 主題色 · 與 About 一致 · 點開比較</div>
+  <div class="grid">
+    <a class="card" href="projects-v1-index-list.html"><div class="n">V1</div><h2>Index List</h2><p>整頁化的垂直清單，沿用首頁 Selected Work 的手法：大編號＋大標＋技術＋箭頭，hover 反白。最簡潔。</p></a>
+    <a class="card" href="projects-v2-magazine-grid.html"><div class="n">V2</div><h2>Magazine Grid</h2><p>雜誌式 2 欄卡片，封面用「排版式佔位」（大編號＋fig.），下方標題／摘要／技術 chips。視覺最豐富。</p></a>
+    <a class="card" href="projects-v3-featured-hero.html"><div class="n">V3</div><h2>Featured + List</h2><p>第一個專案大版面（左文右排版封面），其餘以精簡清單呈現。有層次、突出代表作。</p></a>
+    <a class="card" href="projects-v4-ledger.html"><div class="n">V4</div><h2>Ledger / Index</h2><p>排版目錄式表格：№／Project／Year／↗，置中標題、大量留白。最像「作品目錄」、最克制。</p></a>
+    <a class="card" href="projects-v5-sticky-about.html"><div class="n">V5</div><h2>Sticky (About 一致)</h2><p>直接沿用 About／Experience 的「左 sticky 標籤＋右清單」結構，與現有頁面一致性最高。</p></a>
+  </div>
+  <div class="note">這些是 Projects <b>列表頁</b>的方向探索（內容為已 seed 的 6 個專案）。選定後我會用 Next.js 實作，並接上 API；詳細頁 <code>/projects/[slug]</code> 會依選定風格延伸。所有版本皆遵守 claude-design-x 規範（無激進漸層 / 無 emoji / 無圓角左邊框卡片 / 無假 SVG 圖，改用排版式佔位封面）。</div>
+</div>
+</body>
+</html>
