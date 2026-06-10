@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://tsai-cheng-hung.vercel.app/sitemap.xml
