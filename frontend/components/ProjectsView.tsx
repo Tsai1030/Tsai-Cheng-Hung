@@ -2,38 +2,56 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import type { CSSProperties, MouseEvent } from "react";
 import { useLang } from "./LangContext";
 import type { ProjectCard } from "@/lib/api";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-function Pager({ current, total }: { current: number; total: number }) {
+function Pager({ current, total, base }: { current: number; total: number; base: string }) {
   const { lang } = useLang();
   const pages = Array.from({ length: total }, (_, i) => i + 1);
-  const href = (n: number) => (n === 1 ? "/projects" : `/projects?page=${n}`);
-  const prevDisabled = current <= 1;
-  const nextDisabled = current >= total;
+  const href = (n: number) => (n === 1 ? base : `${base}?page=${n}`);
   return (
     <div className="pager" role="navigation" aria-label={lang === "en" ? "Pagination" : "分頁"}>
-      {prevDisabled ? (
+      {current <= 1 ? (
         <span className="disabled arrow">←</span>
       ) : (
         <Link className="arrow" href={href(current - 1)} aria-label="Previous">←</Link>
       )}
       {pages.map((n) =>
         n === current ? (
-          <span key={n} className="active" aria-current="page">{n}</span>
+          <span key={n} className="active" aria-current="page">{pad(n)}</span>
         ) : (
-          <Link key={n} href={href(n)}>{n}</Link>
+          <Link key={n} href={href(n)}>{pad(n)}</Link>
         )
       )}
-      {nextDisabled ? (
+      {current >= total ? (
         <span className="disabled arrow">→</span>
       ) : (
         <Link className="arrow" href={href(current + 1)} aria-label="Next">→</Link>
       )}
     </div>
   );
+}
+
+export { Pager };
+
+// 3D tilt driven by pointer position, written to CSS vars on the card.
+function tilt(e: MouseEvent<HTMLElement>) {
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  const px = (e.clientX - r.left) / r.width - 0.5;
+  const py = (e.clientY - r.top) / r.height - 0.5;
+  el.style.setProperty("--rx", `${(-py * 5).toFixed(2)}deg`);
+  el.style.setProperty("--ry", `${(px * 7).toFixed(2)}deg`);
+  el.style.setProperty("--gx", `${((px + 0.5) * 100).toFixed(1)}%`);
+  el.style.setProperty("--gy", `${((py + 0.5) * 100).toFixed(1)}%`);
+}
+function untilt(e: MouseEvent<HTMLElement>) {
+  const el = e.currentTarget;
+  el.style.setProperty("--rx", "0deg");
+  el.style.setProperty("--ry", "0deg");
 }
 
 export default function ProjectsView({
@@ -51,19 +69,12 @@ export default function ProjectsView({
   const t = <T,>(en: T, zh: T) => (lang === "en" ? en : zh);
 
   return (
-    <>
-      <div className="pj-wrap">
-        <div>
-          <div className="pj-eyebrow">05 — {t("Selected Work", "精選專案")}</div>
-          <h1>{t("Projects", "專案")}</h1>
-        </div>
-        <p className="pj-intro">
-          {t("Jotting down the little moments", "紀錄點點滴滴")}
-          <span className="pj-dots" aria-hidden="true">
-            <span>.</span>
-            <span>.</span>
-            <span>.</span>
-          </span>
+    <main className="page">
+      <div className="page-head">
+        <div className="page-eyebrow" data-reveal>SYS/05 — {t("SELECTED WORK", "精選專案")}</div>
+        <h1 data-reveal>{t("PROJECTS", "專案")}</h1>
+        <p className="page-sub" data-reveal>
+          {t("Systems shipped, not just demoed.", "不只是 demo，而是真正上線的系統。")}
         </p>
       </div>
 
@@ -71,7 +82,18 @@ export default function ProjectsView({
         {items.map((p, i) => {
           const n = pad(startIndex + i + 1);
           return (
-            <Link className="pj-card" href={`/projects/${p.slug}`} key={p.id}>
+            <Link
+              className="pj-card"
+              href={`/projects/${p.slug}`}
+              key={p.id}
+              data-reveal
+              data-hover
+              style={{ "--d": `${(i % 2) * 0.08}s` } as CSSProperties}
+              onMouseMove={tilt}
+              onMouseLeave={untilt}
+            >
+              <span className="bk bk-tl" /><span className="bk bk-tr" />
+              <span className="bk bk-bl" /><span className="bk bk-br" />
               <div className="pj-cover">
                 {p.cover_image ? (
                   <Image
@@ -85,11 +107,15 @@ export default function ProjectsView({
                 ) : (
                   <span className="pj-figno">{n}</span>
                 )}
-                <span className="pj-fig">fig. {n}</span>
-                {p.featured && <span className="pj-fe">{t("Featured", "精選")}</span>}
+                <span className="pj-scan" aria-hidden="true" />
+                <span className="pj-fig">FIG_{n}</span>
+                {p.featured && <span className="pj-fe">★ {t("FEATURED", "精選")}</span>}
               </div>
               <div className="pj-body">
-                {p.period && <div className="pj-yr">{p.period}</div>}
+                <div className="pj-row">
+                  <span className="pj-no">{n}</span>
+                  {p.period && <span className="pj-yr">{p.period}</span>}
+                </div>
                 <h3>{t(p.title_en, p.title_zh)}</h3>
                 <p className="pj-sum">{t(p.summary_en, p.summary_zh)}</p>
                 <div className="pj-chips">
@@ -103,7 +129,7 @@ export default function ProjectsView({
         })}
       </div>
 
-      <Pager current={current} total={total} />
-    </>
+      <Pager current={current} total={total} base="/projects" />
+    </main>
   );
 }

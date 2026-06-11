@@ -70,6 +70,8 @@ const cards: Card[] = [
 export default function CareerSlices() {
   const pinRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const fillRef = useRef<HTMLSpanElement>(null);
+  const pctRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const pin = pinRef.current;
@@ -85,8 +87,11 @@ export default function CareerSlices() {
       const total = pin.offsetHeight - window.innerHeight;
       if (total <= 0) return;
       const prog = Math.min(Math.max(-pin.getBoundingClientRect().top / total, 0), 1);
-      const max = Math.max(0, track.scrollWidth - window.innerWidth + 40);
+      const max = Math.max(0, track.scrollWidth - window.innerWidth + 48);
       track.style.transform = `translateX(${-prog * max}px)`;
+      if (fillRef.current) fillRef.current.style.width = `${prog * 100}%`;
+      if (pctRef.current)
+        pctRef.current.textContent = String(Math.round(prog * 100)).padStart(3, "0");
     };
 
     window.addEventListener("scroll", horiz, { passive: true });
@@ -99,24 +104,25 @@ export default function CareerSlices() {
   }, []);
 
   return (
-    <section id="career" className="gal-section">
-      <div className="gal-pin" ref={pinRef}>
-        <div className="gal-sticky">
-          <div className="gal-head">
+    <section id="career" className="cr-section">
+      <div className="cr-pin" ref={pinRef}>
+        <div className="cr-sticky">
+          <div className="cr-head">
             <div className="left">
-              <div className="num">02</div>
-              <h2><L en="Career Slices" zh="職涯切片" /></h2>
+              <div className="idx" data-reveal>SYS/02</div>
+              <h2 data-reveal><L en="Career Slices" zh="職涯切片" /></h2>
             </div>
-            <p className="sub">
+            <p className="sub" data-reveal>
               <L
                 en="A horizontal look back at every role I've worn — from hospital floors to AI engineering."
                 zh="橫向回顧我扮演過的每個身分——從醫院現場到 AI 工程。"
               />
             </p>
           </div>
-          <div className="gal-track" ref={trackRef}>
+          <div className="cr-track" ref={trackRef}>
             {cards.map((c, i) => (
-              <article className="cs-card" key={i}>
+              <article className="cr-card" key={i} data-hover>
+                <span className="cr-no">{String(i + 1).padStart(2, "0")} / {String(cards.length).padStart(2, "0")}</span>
                 <div className="ph">
                   <Image
                     src={c.img}
@@ -135,8 +141,10 @@ export default function CareerSlices() {
               </article>
             ))}
           </div>
-          <div className="gal-note">
-            <L en="Scroll ↓ — cards slide →" zh="向下捲動 ↓ — 卡片橫向滑動 →" />
+          <div className="cr-hud">
+            <span className="cr-note"><L en="SCROLL ↓ — TRACK SLIDES →" zh="向下捲動 ↓ — 卡片橫向滑動 →" /></span>
+            <span className="cr-meter"><span className="cr-fill" ref={fillRef} /></span>
+            <span className="cr-pct">TRK_<span ref={pctRef}>000</span>%</span>
           </div>
         </div>
       </div>

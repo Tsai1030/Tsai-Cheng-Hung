@@ -36,26 +36,30 @@ export default function ProjectDetailView({ project: p }: { project: ProjectDeta
   const showCover = Boolean(p.cover_image) && !ytId && !bodyHasImage;
 
   return (
-    <div className="pd-wrap">
-      <Link className="pd-back" href="/projects">← {t("All projects", "所有專案")}</Link>
+    <main className="page pd-wrap">
+      <Link className="pd-back" href="/projects" data-hover>
+        ← {t("ALL PROJECTS", "所有專案")}
+      </Link>
 
-      <div className="pd-eyebrow">
-        {p.period ?? ""}
-        {p.featured ? ` · ${t("Featured", "精選")}` : ""}
+      <div className="pd-eyebrow" data-reveal>
+        PROJECT_FILE {p.period ? `· ${p.period}` : ""}
+        {p.featured ? ` · ★ ${t("FEATURED", "精選")}` : ""}
       </div>
-      <h1>{t(p.title_en, p.title_zh)}</h1>
-      <p className="pd-summary">{t(p.summary_en, p.summary_zh)}</p>
+      <h1 data-reveal>{t(p.title_en, p.title_zh)}</h1>
+      <p className="pd-summary" data-reveal>{t(p.summary_en, p.summary_zh)}</p>
 
-      <div className="pd-meta">
-        {(p.role_en || p.role_zh) && <span>{t(p.role_en, p.role_zh)}</span>}
-      </div>
+      {(p.role_en || p.role_zh) && (
+        <div className="pd-meta" data-reveal>
+          <span>{t(p.role_en, p.role_zh)}</span>
+        </div>
+      )}
 
       {(Object.keys(p.links ?? {}).length > 0 || p.github_stars != null || p.github_forks != null) && (
-        <div className="pd-links">
+        <div className="pd-links" data-reveal>
           {Object.entries(p.links)
             .sort(([a], [b]) => linkRank(a) - linkRank(b))
             .map(([key, url]) => (
-              <a key={key} href={url} target="_blank" rel="noopener">
+              <a key={key} href={url} target="_blank" rel="noopener" data-hover>
                 {LINK_LABELS[key] ?? key} ↗
               </a>
             ))}
@@ -73,7 +77,7 @@ export default function ProjectDetailView({ project: p }: { project: ProjectDeta
       )}
 
       {p.tech.length > 0 && (
-        <div className="pd-chips">
+        <div className="pd-chips" data-reveal>
           {p.tech.map((tech) => (
             <span key={tech}>{tech}</span>
           ))}
@@ -81,13 +85,13 @@ export default function ProjectDetailView({ project: p }: { project: ProjectDeta
       )}
 
       {showCover && p.cover_image && (
-        <div className="pd-cover">
+        <div className="pd-cover" data-reveal>
           <Image src={p.cover_image} alt="" fill sizes="(max-width: 820px) 100vw, 880px" style={{ objectFit: "cover" }} />
         </div>
       )}
 
       {ytId && (
-        <div className="pd-video">
+        <div className="pd-video" data-reveal>
           <iframe
             src={`https://www.youtube.com/embed/${ytId}?rel=0`}
             title={t("Project demo video", "專案示範影片")}
@@ -114,6 +118,6 @@ export default function ProjectDetailView({ project: p }: { project: ProjectDeta
           {t(p.body_en, p.body_zh)}
         </ReactMarkdown>
       </article>
-    </div>
+    </main>
   );
 }

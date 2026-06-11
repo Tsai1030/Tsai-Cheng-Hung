@@ -21,27 +21,27 @@ export default function PostDetailView({ post: p }: { post: PostDetail }) {
     : "";
 
   return (
-    <div className="pd-wrap">
-      <Link className="pd-back" href="/blog">← {t("All posts", "所有文章")}</Link>
+    <main className="page pd-wrap">
+      <Link className="pd-back" href="/blog" data-hover>
+        ← {t("ALL POSTS", "所有文章")}
+      </Link>
 
-      <div className="pd-eyebrow">
-        {date}
-        {date ? " · " : ""}
-        {p.reading_minutes} {t("min read", "分鐘閱讀")}
+      <div className="pd-eyebrow" data-reveal>
+        LOG_ENTRY {date ? `· ${date}` : ""} · ⊙ {p.reading_minutes} {t("MIN READ", "分鐘閱讀")}
       </div>
-      <h1>{t(p.title_en, p.title_zh)}</h1>
-      <p className="pd-summary">{t(p.excerpt_en, p.excerpt_zh)}</p>
+      <h1 data-reveal>{t(p.title_en, p.title_zh)}</h1>
+      <p className="pd-summary" data-reveal>{t(p.excerpt_en, p.excerpt_zh)}</p>
 
       {p.tags.length > 0 && (
-        <div className="pd-chips">
+        <div className="pd-chips" data-reveal>
           {p.tags.map((tag) => (
-            <span key={tag}>{tag}</span>
+            <span key={tag}>#{tag}</span>
           ))}
         </div>
       )}
 
       {p.cover_image && (
-        <div className="pd-cover">
+        <div className="pd-cover" data-reveal>
           <Image src={p.cover_image} alt="" fill sizes="(max-width: 820px) 100vw, 880px" style={{ objectFit: "cover" }} />
         </div>
       )}
@@ -49,6 +49,6 @@ export default function PostDetailView({ post: p }: { post: PostDetail }) {
       <article className="pd-body">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{t(p.body_en, p.body_zh)}</ReactMarkdown>
       </article>
-    </div>
+    </main>
   );
 }
