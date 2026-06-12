@@ -63,7 +63,7 @@ export default function Hero() {
             )}
           </h1>
           <div className="hero-alt">
-            <L en="蔡承紘 — AI Application · Frontend Engineer" zh="Tsai Cheng-Hung — AI 應用 · 全端工程師" />
+            <L en="蔡承紘 — AI Application · Full-Stack Engineer" zh="Tsai Cheng-Hung — AI 應用 · 全端工程師" />
           </div>
           <p className="hero-role">
             <L

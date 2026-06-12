@@ -5,7 +5,7 @@ PROFILE_TITLE = {"en": "About Tsai Cheng-Hung", "zh": "關於蔡承紘"}
 
 PROFILE = {
     "en": (
-        "Tsai Cheng-Hung (蔡承紘) is an AI Application & Frontend Engineer based in Kaohsiung / Taipei, "
+        "Tsai Cheng-Hung (蔡承紘) is an AI Application & Full-Stack Engineer based in Kaohsiung / Taipei, "
         "Taiwan. He holds an M.S. from the AI track of Medical Informatics at Kaohsiung Medical University. "
         "He specializes in RAG systems, agentic workflows with LangGraph, and the frontend interfaces that "
         "bring them to life — bridging medical informatics and AI engineering.\n\n"

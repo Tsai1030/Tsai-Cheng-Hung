@@ -36,9 +36,9 @@ const tc = Noto_Sans_TC({
 });
 
 export const metadata: Metadata = {
-  title: "Tsai Cheng-Hung — AI Application & Frontend Engineer",
+  title: "Tsai Cheng-Hung — AI Application & Full-Stack Engineer",
   description:
-    "Tsai Cheng-Hung (蔡承紘) — AI Application & Frontend Engineer. RAG systems, agentic workflows, and the interfaces that bring them to life.",
+    "Tsai Cheng-Hung (蔡承紘) — AI Application & Full-Stack Engineer. RAG systems, agentic workflows, and the interfaces that bring them to life.",
   icons: {
     icon: [{ url: "/favicon.ico?v=20260604", type: "image/x-icon" }],
     shortcut: [{ url: "/favicon.ico?v=20260604", type: "image/x-icon" }],

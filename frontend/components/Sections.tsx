@@ -44,14 +44,14 @@ export function About() {
           en="About"
           zh="關於我"
           tagEn="A medical-informatics graduate who fell for frontend craft."
-          tagZh="一個愛上前端工藝的醫務資訊背景工程師。"
+          tagZh="一個愛上 LLM 研究的 AI 工程師。"
         />
         <div>
           <Rich
             as="p"
             className="about-tagline"
             data-reveal=""
-            en="AI Application & Frontend Engineer — building <b>reliable AI systems</b> and shipping <b>real-world products</b>."
+            en="AI Application & Full-Stack Engineer — building <b>reliable AI systems</b> and shipping <b>real-world products</b>."
             zh="AI 應用與全端工程師——打造<b>可靠的 AI 系統</b>，交付<b>真正能用的產品</b>。"
           />
           <div className="hi" data-reveal style={d(0.08)}>
