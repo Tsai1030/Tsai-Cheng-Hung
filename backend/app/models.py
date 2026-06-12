@@ -104,4 +104,7 @@ class DocChunk(Base):
     chunk_index: Mapped[int] = mapped_column(Integer, default=0)
     content: Mapped[str] = mapped_column(Text)
     embedding: Mapped[list[float]] = mapped_column(Vector(768))
+    # sha256 of the source's full text — all chunks of a source share it.
+    # Lets the indexer skip re-embedding sources whose content hasn't changed.
+    content_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

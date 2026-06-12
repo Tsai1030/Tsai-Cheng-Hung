@@ -11,6 +11,7 @@ from sqlalchemy.dialects.postgresql import insert
 
 from app.db import SessionLocal, engine
 from app.models import Post, Project
+from app.rag.indexer import sync_index
 
 PROJECTS: list[dict] = [
     {
@@ -960,8 +961,13 @@ async def main() -> None:
         await _upsert(session, Project, PROJECTS)
         await _upsert(session, Post, POSTS)
         await session.commit()
+        print(f"Seeded {len(PROJECTS)} projects and {len(POSTS)} posts.")
+        stats = await sync_index(session)
+        print(
+            f"Index synced: {stats['reindexed']}/{stats['sources']} sources re-embedded "
+            f"({stats['chunks']} chunks), {stats['removed']} removed."
+        )
     await engine.dispose()
-    print(f"Seeded {len(PROJECTS)} projects and {len(POSTS)} posts.")
 
 
 if __name__ == "__main__":
