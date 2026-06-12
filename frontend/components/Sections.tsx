@@ -269,6 +269,18 @@ export function Footer() {
         <a href="mailto:pijh102511@gmail.com"><MailIcon /> pijh102511@gmail.com</a>
         <a href="tel:+886965072800"><PhoneIcon /> 0965 072 800</a>
       </div>
+      <div className="foot-projects" data-reveal>
+        <span className="foot-projects-label"><L en="// SIDE_PROJECTS" zh="// 小型作品" /></span>
+        <a href="https://moneymind-sand.vercel.app/" target="_blank" rel="noopener">
+          MoneyMind <span className="foot-proj-tag"><L en="EXPENSE TRACKER" zh="記帳 APP" /></span>
+        </a>
+        <a href="https://train-time-ten.vercel.app/" target="_blank" rel="noopener">
+          TrainTime <span className="foot-proj-tag"><L en="TRAIN SCHEDULE" zh="火車查詢 APP" /></span>
+        </a>
+        <a href="https://ziwei-frontend.onrender.com/" target="_blank" rel="noopener">
+          Ziwei <span className="foot-proj-tag"><L en="ZIWEI ASTROLOGY" zh="紫微斗數 WEB APP" /></span>
+        </a>
+      </div>
       <div className="foot-meta">
         <span>© 2026 TSAI CHENG-HUNG</span>
         <span>BUILT WITH NEXT.JS + THREE.JS</span>

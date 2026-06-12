@@ -485,6 +485,19 @@ footer {
 }
 .contact a:hover { border-color: var(--cy); color: var(--cy); transform: translateY(-3px); box-shadow: 0 0 24px rgba(60, 232, 255, 0.16); }
 .contact svg { width: 14px; height: 14px; fill: var(--cy); }
+.foot-projects {
+  margin-top: 34px; display: flex; justify-content: center; align-items: center;
+  gap: 14px; flex-wrap: wrap;
+}
+.foot-projects-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.3em; color: var(--cy); }
+.foot-projects a {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em;
+  border: 1px dashed var(--line2); color: var(--txt);
+  padding: 8px 14px; transition: all 0.25s ease;
+}
+.foot-projects a:hover { border-color: var(--cy); color: var(--cy); border-style: solid; }
+.foot-proj-tag { font-size: 0.56rem; letter-spacing: 0.18em; color: var(--faint); }
 .foot-meta {
   margin-top: 80px; padding-top: 22px; border-top: 1px dashed var(--line);
   display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap;
