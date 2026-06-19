@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy import select
+from sqlalchemy import func, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..db import get_session
 from ..models import Post
-from ..schemas import PostCard, PostDetail
+from ..schemas import LikeCount, PostCard, PostDetail
 
 router = APIRouter(prefix="/posts", tags=["posts"])
 
@@ -28,3 +28,37 @@ async def get_post(slug: str, session: AsyncSession = Depends(get_session)) -> P
     if post is None:
         raise HTTPException(status_code=404, detail="Post not found")
     return post
+
+
+@router.post("/{post_id}/like", response_model=LikeCount)
+async def like_post(
+    post_id: int, session: AsyncSession = Depends(get_session)
+) -> dict[str, int]:
+    stmt = (
+        update(Post)
+        .where(Post.id == post_id)
+        .values(likes=Post.likes + 1)
+        .returning(Post.likes)
+    )
+    likes = (await session.execute(stmt)).scalar_one_or_none()
+    if likes is None:
+        raise HTTPException(status_code=404, detail="Post not found")
+    await session.commit()
+    return {"likes": likes}
+
+
+@router.post("/{post_id}/unlike", response_model=LikeCount)
+async def unlike_post(
+    post_id: int, session: AsyncSession = Depends(get_session)
+) -> dict[str, int]:
+    stmt = (
+        update(Post)
+        .where(Post.id == post_id)
+        .values(likes=func.greatest(Post.likes - 1, 0))
+        .returning(Post.likes)
+    )
+    likes = (await session.execute(stmt)).scalar_one_or_none()
+    if likes is None:
+        raise HTTPException(status_code=404, detail="Post not found")
+    await session.commit()
+    return {"likes": likes}

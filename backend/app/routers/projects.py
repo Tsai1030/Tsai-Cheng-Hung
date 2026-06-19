@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy import select
+from sqlalchemy import func, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..db import get_session
 from ..models import Project
-from ..schemas import ProjectCard, ProjectDetail
+from ..schemas import LikeCount, ProjectCard, ProjectDetail
 
 router = APIRouter(prefix="/projects", tags=["projects"])
 
@@ -32,3 +32,37 @@ async def get_project(slug: str, session: AsyncSession = Depends(get_session)) -
     if project is None:
         raise HTTPException(status_code=404, detail="Project not found")
     return project
+
+
+@router.post("/{project_id}/like", response_model=LikeCount)
+async def like_project(
+    project_id: int, session: AsyncSession = Depends(get_session)
+) -> dict[str, int]:
+    stmt = (
+        update(Project)
+        .where(Project.id == project_id)
+        .values(likes=Project.likes + 1)
+        .returning(Project.likes)
+    )
+    likes = (await session.execute(stmt)).scalar_one_or_none()
+    if likes is None:
+        raise HTTPException(status_code=404, detail="Project not found")
+    await session.commit()
+    return {"likes": likes}
+
+
+@router.post("/{project_id}/unlike", response_model=LikeCount)
+async def unlike_project(
+    project_id: int, session: AsyncSession = Depends(get_session)
+) -> dict[str, int]:
+    stmt = (
+        update(Project)
+        .where(Project.id == project_id)
+        .values(likes=func.greatest(Project.likes - 1, 0))
+        .returning(Project.likes)
+    )
+    likes = (await session.execute(stmt)).scalar_one_or_none()
+    if likes is None:
+        raise HTTPException(status_code=404, detail="Project not found")
+    await session.commit()
+    return {"likes": likes}

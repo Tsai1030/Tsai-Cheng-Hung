@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { CSSProperties, MouseEvent } from "react";
 import { useLang } from "./LangContext";
+import LikeButton from "./LikeButton";
 import type { ProjectCard } from "@/lib/api";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -122,6 +123,9 @@ export default function ProjectsView({
                   {p.tech.slice(0, 4).map((tech) => (
                     <span key={tech}>{tech}</span>
                   ))}
+                </div>
+                <div className="pj-like">
+                  <LikeButton kind="project" id={p.id} initial={p.likes} />
                 </div>
               </div>
             </Link>

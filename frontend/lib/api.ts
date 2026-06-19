@@ -18,6 +18,7 @@ export type ProjectCard = {
   role_en: string | null;
   role_zh: string | null;
   featured: boolean;
+  likes: number;
 };
 
 export type ProjectDetail = ProjectCard & {
@@ -72,6 +73,7 @@ export type PostCard = {
   tags: string[];
   reading_minutes: number;
   published_at: string | null;
+  likes: number;
 };
 
 export type PostDetail = PostCard & {
@@ -108,5 +110,17 @@ export async function getPost(slug: string): Promise<PostDetail | null> {
   if (!res.ok) throw new Error(`GET /posts/${slug} failed: ${res.status}`);
   return res.json();
 }
+
+// ---------- Likes ----------
+// POST endpoints that mutate the shared count in Supabase. Not cached.
+async function postLike(path: string): Promise<number> {
+  const res = await fetch(`${API_BASE}${path}`, { method: "POST" });
+  if (!res.ok) throw new Error(`POST ${path} failed: ${res.status}`);
+  return (await res.json()).likes as number;
+}
+export const likeProject = (id: number) => postLike(`/projects/${id}/like`);
+export const unlikeProject = (id: number) => postLike(`/projects/${id}/unlike`);
+export const likePost = (id: number) => postLike(`/posts/${id}/like`);
+export const unlikePost = (id: number) => postLike(`/posts/${id}/unlike`);
 
 export { API_BASE };

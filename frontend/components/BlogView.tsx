@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { useLang } from "./LangContext";
 import { Pager } from "./ProjectsView";
+import LikeButton from "./LikeButton";
 import type { PostCard } from "@/lib/api";
 
 export default function BlogView({
@@ -64,6 +65,9 @@ export default function BlogView({
                   {p.tags.map((tag) => (
                     <span key={tag}>#{tag}</span>
                   ))}
+                </div>
+                <div className="bl-like">
+                  <LikeButton kind="post" id={p.id} initial={p.likes} />
                 </div>
               </div>
               <span className="bl-arrow" aria-hidden="true">→</span>

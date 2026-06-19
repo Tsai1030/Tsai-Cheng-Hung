@@ -571,6 +571,21 @@ footer {
   font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.06em;
   color: var(--dim); border: 1px solid var(--line); padding: 4px 9px;
 }
+.pj-like { margin-top: 16px; }
+.bl-like { margin-top: 14px; }
+
+/* ---------- like button ---------- */
+.like-btn {
+  display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em;
+  color: var(--dim); border: 1px solid var(--line); padding: 4px 9px;
+  background: transparent; transition: all 0.2s ease; user-select: none;
+}
+.like-btn:hover { color: var(--cy); border-color: var(--cy); }
+.like-btn.liked {
+  color: var(--cy); border-color: var(--cy);
+  box-shadow: 0 0 14px rgba(60, 232, 255, 0.16);
+}
 
 /* ---------- blog feed ---------- */
 .bl-feed { display: grid; border-top: 1px dashed var(--line); }
