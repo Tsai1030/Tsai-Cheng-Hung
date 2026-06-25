@@ -89,14 +89,23 @@ export function About() {
 
 const xp = [
   {
-    date: ["2026.04 — PRESENT", "2026.04 — 迄今"],
+    date: ["2026.06 — PRESENT", "2026.06 — 迄今"],
+    role: { en: "AI Agent Engineer", zh: "AI Agent 工程師" },
+    org: "YAGEO / 國巨股份有限公司",
+    desc: {
+      en: "Building MES AI agents — bringing autonomous agents into manufacturing execution and smart factory workflows.",
+      zh: "打造 MES AI agent，將自主 Agent 導入製造執行系統與智慧工廠流程。",
+    },
+    live: true,
+  },
+  {
+    date: ["2026.04 — 2026.06", "2026.04 — 2026.06"],
     role: { en: "AI Application Engineer", zh: "AI 應用工程師" },
     org: "BES / 中華工程",
     desc: {
       en: "Building production RAG systems, autonomous agents, and automation pipelines.",
       zh: "負責產品級 RAG 系統、自主 Agent 與自動化流程開發。",
     },
-    live: true,
   },
   {
     date: ["2025.08 — 2025.10", "2025.08 — 2025.10"],

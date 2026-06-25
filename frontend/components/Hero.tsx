@@ -82,7 +82,7 @@ export default function Hero() {
             </div>
             <div>
               <span className="k"><L en="CURRENTLY" zh="現職" /></span>
-              <span className="v"><L en="AI Engineer @ BES" zh="中華工程 AI 工程師" /></span>
+              <span className="v"><L en="AI Engineer @ YAGEO" zh="國巨股份有限公司 AI 工程師" /></span>
             </div>
           </div>
         </div>

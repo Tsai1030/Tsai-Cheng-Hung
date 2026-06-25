@@ -60,10 +60,20 @@ const cards: Card[] = [
   },
   {
     img: "/AI%20Application%20Engineer.png",
-    badge: { en: "Current", zh: "現職" },
+    badge: { en: "Experience", zh: "工作經歷" },
     role: { en: "AI Application Engineer", zh: "AI 應用工程師" },
     org: "中華工程 / BES",
     desc: { en: "Production RAG systems, agents & automation.", zh: "產品級 RAG 系統、Agent 與自動化。" },
+  },
+  {
+    img: "/YAGEO%20AI%20AGENT%20ENGINEER.png",
+    badge: { en: "Current", zh: "現職" },
+    role: { en: "AI Agent Engineer", zh: "AI Agent 工程師" },
+    org: "國巨股份有限公司 / YAGEO",
+    desc: {
+      en: "Building MES AI agents — bringing autonomous agents into manufacturing execution & smart factory workflows.",
+      zh: "打造 MES AI agent，將自主 Agent 導入製造執行系統與智慧工廠流程。",
+    },
   },
 ];
 
