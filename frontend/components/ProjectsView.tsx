@@ -5,6 +5,7 @@ import Image from "next/image";
 import type { CSSProperties, MouseEvent } from "react";
 import { useLang } from "./LangContext";
 import LikeButton from "./LikeButton";
+import { EyeIcon } from "./icons";
 import type { ProjectCard } from "@/lib/api";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -125,6 +126,10 @@ export default function ProjectsView({
                   ))}
                 </div>
                 <div className="pj-like">
+                  <span className="view-count" aria-label={t("Views", "瀏覽次數")}>
+                    <EyeIcon />
+                    {p.views}
+                  </span>
                   <LikeButton kind="project" id={p.id} initial={p.likes} />
                 </div>
               </div>

@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..db import get_session
 from ..models import Project
-from ..schemas import LikeCount, ProjectCard, ProjectDetail
+from ..schemas import LikeCount, ProjectCard, ProjectDetail, ViewCount
 
 router = APIRouter(prefix="/projects", tags=["projects"])
 
@@ -49,6 +49,23 @@ async def like_project(
         raise HTTPException(status_code=404, detail="Project not found")
     await session.commit()
     return {"likes": likes}
+
+
+@router.post("/{project_id}/view", response_model=ViewCount)
+async def view_project(
+    project_id: int, session: AsyncSession = Depends(get_session)
+) -> dict[str, int]:
+    stmt = (
+        update(Project)
+        .where(Project.id == project_id)
+        .values(views=Project.views + 1)
+        .returning(Project.views)
+    )
+    views = (await session.execute(stmt)).scalar_one_or_none()
+    if views is None:
+        raise HTTPException(status_code=404, detail="Project not found")
+    await session.commit()
+    return {"views": views}
 
 
 @router.post("/{project_id}/unlike", response_model=LikeCount)

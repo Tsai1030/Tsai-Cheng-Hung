@@ -5,6 +5,7 @@ import type { CSSProperties } from "react";
 import { useLang } from "./LangContext";
 import { Pager } from "./ProjectsView";
 import LikeButton from "./LikeButton";
+import { EyeIcon } from "./icons";
 import type { PostCard } from "@/lib/api";
 
 export default function BlogView({
@@ -67,6 +68,10 @@ export default function BlogView({
                   ))}
                 </div>
                 <div className="bl-like">
+                  <span className="view-count" aria-label={t("Views", "瀏覽次數")}>
+                    <EyeIcon />
+                    {p.views}
+                  </span>
                   <LikeButton kind="post" id={p.id} initial={p.likes} />
                 </div>
               </div>

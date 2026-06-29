@@ -23,6 +23,7 @@ class ProjectCard(_ORM):
     role_zh: str | None = None
     featured: bool = False
     likes: int = 0
+    views: int = 0
 
 
 class ProjectDetail(ProjectCard):
@@ -45,6 +46,11 @@ class LikeCount(BaseModel):
     likes: int
 
 
+# ---------- Views ----------
+class ViewCount(BaseModel):
+    views: int
+
+
 # ---------- Posts ----------
 class PostCard(_ORM):
     id: int
@@ -58,6 +64,7 @@ class PostCard(_ORM):
     reading_minutes: int = 1
     published_at: datetime | None = None
     likes: int = 0
+    views: int = 0
 
 
 class PostDetail(PostCard):

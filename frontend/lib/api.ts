@@ -19,6 +19,7 @@ export type ProjectCard = {
   role_zh: string | null;
   featured: boolean;
   likes: number;
+  views: number;
 };
 
 export type ProjectDetail = ProjectCard & {
@@ -74,6 +75,7 @@ export type PostCard = {
   reading_minutes: number;
   published_at: string | null;
   likes: number;
+  views: number;
 };
 
 export type PostDetail = PostCard & {
@@ -122,5 +124,15 @@ export const likeProject = (id: number) => postLike(`/projects/${id}/like`);
 export const unlikeProject = (id: number) => postLike(`/projects/${id}/unlike`);
 export const likePost = (id: number) => postLike(`/posts/${id}/like`);
 export const unlikePost = (id: number) => postLike(`/posts/${id}/unlike`);
+
+// ---------- Views ----------
+// Fired once per visitor session from the detail page (see ViewPing).
+async function postView(path: string): Promise<number> {
+  const res = await fetch(`${API_BASE}${path}`, { method: "POST" });
+  if (!res.ok) throw new Error(`POST ${path} failed: ${res.status}`);
+  return (await res.json()).views as number;
+}
+export const viewProject = (id: number) => postView(`/projects/${id}/view`);
+export const viewPost = (id: number) => postView(`/posts/${id}/view`);
 
 export { API_BASE };

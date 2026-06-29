@@ -5,6 +5,7 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useLang } from "./LangContext";
+import ViewPing from "./ViewPing";
 import type { PostDetail } from "@/lib/api";
 
 export default function PostDetailView({ post: p }: { post: PostDetail }) {
@@ -22,6 +23,7 @@ export default function PostDetailView({ post: p }: { post: PostDetail }) {
 
   return (
     <main className="page pd-wrap">
+      <ViewPing kind="post" id={p.id} />
       <Link className="pd-back" href="/blog" data-hover>
         ← {t("ALL POSTS", "所有文章")}
       </Link>

@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useLang } from "./LangContext";
 import { StarIcon, ForkIcon } from "./icons";
+import ViewPing from "./ViewPing";
 import type { ProjectDetail } from "@/lib/api";
 
 const LINK_LABELS: Record<string, string> = {
@@ -37,6 +38,7 @@ export default function ProjectDetailView({ project: p }: { project: ProjectDeta
 
   return (
     <main className="page pd-wrap">
+      <ViewPing kind="project" id={p.id} />
       <Link className="pd-back" href="/projects" data-hover>
         ← {t("ALL PROJECTS", "所有專案")}
       </Link>
