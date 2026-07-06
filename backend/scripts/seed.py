@@ -326,7 +326,7 @@ PROJECTS: list[dict] = [
             "LangGraph", "FastAPI", "Hybrid RAG", "ChromaDB", "BM25", "RRF",
             "Gemini Grounded Search", "OpenAI Embeddings", "SQLAlchemy", "python-docx", "Next.js", "TypeScript",
         ],
-        "links": {"github": "https://github.com/Tsai1030/LangGraph_RAG_SYSTEM", "demo": "https://kccc3798.tail138ec9.ts.net/"},
+        "links": {"github": "https://github.com/Tsai1030/LangGraph_RAG_SYSTEM", "demo": "https://kccw0077.tail1745b4.ts.net:8443/"},
         "cover_image": "/Construction%20Knowledge%20RAG.png",
         "video_url": "https://youtu.be/nkTNDAlCj2U",
         "period": "2026–",
