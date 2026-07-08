@@ -597,6 +597,15 @@ footer {
 }
 
 /* ---------- blog feed ---------- */
+.bl-tabs { display: flex; gap: 10px; margin-top: 22px; }
+.bl-tabs a {
+  font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.22em;
+  padding: 8px 18px; border: 1px solid var(--line); color: var(--dim);
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+.bl-tabs a:hover { color: var(--txt); border-color: var(--line2); }
+.bl-tabs a.active { color: var(--cy); border-color: var(--line2); background: rgba(60, 232, 255, 0.05); }
+
 .bl-feed { display: grid; border-top: 1px dashed var(--line); }
 .bl-post {
   display: grid; grid-template-columns: 150px 1fr 46px; gap: 30px; align-items: start;

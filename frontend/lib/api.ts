@@ -90,15 +90,29 @@ export type PostDetail = PostCard & {
   updated_at: string;
 };
 
-export async function getPosts(): Promise<PostCard[]> {
-  const res = await fetch(`${API_BASE}/posts`, { next: { revalidate: REVALIDATE } });
+// Daily AI report posts are tagged with this and listed on /blog/daily
+// instead of the main /blog feed.
+export const DAILY_TAG = "ai-daily";
+
+export async function getPosts(opts?: {
+  tag?: string;
+  excludeTag?: string;
+}): Promise<PostCard[]> {
+  const params = new URLSearchParams();
+  if (opts?.tag) params.set("tag", opts.tag);
+  if (opts?.excludeTag) params.set("exclude_tag", opts.excludeTag);
+  const qs = params.size > 0 ? `?${params.toString()}` : "";
+  const res = await fetch(`${API_BASE}/posts${qs}`, { next: { revalidate: REVALIDATE } });
   if (!res.ok) throw new Error(`GET /posts failed: ${res.status}`);
   return res.json();
 }
 
-export async function getPostsSafe(): Promise<PostCard[]> {
+export async function getPostsSafe(opts?: {
+  tag?: string;
+  excludeTag?: string;
+}): Promise<PostCard[]> {
   try {
-    return await getPosts();
+    return await getPosts(opts);
   } catch {
     return [];
   }
