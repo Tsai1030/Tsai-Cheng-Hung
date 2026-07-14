@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, Header, HTTPException
@@ -5,11 +6,13 @@ from sqlalchemy import func, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..config import get_settings
-from ..db import get_session
+from ..db import SessionLocal, get_session
 from ..models import Post
+from ..rag.indexer import sync_index
 from ..schemas import LikeCount, PostCard, PostDetail, PostUpsert, ViewCount
 
 router = APIRouter(prefix="/posts", tags=["posts"])
+logger = logging.getLogger("uvicorn.error")
 
 
 def require_admin(authorization: str | None = Header(default=None)) -> None:
@@ -61,6 +64,18 @@ async def upsert_post(
 
     await session.commit()
     await session.refresh(post)
+
+    # Keep the RAG index in step with the write: re-chunk + re-embed only the
+    # sources whose text changed (i.e. this post). Runs on its own session so a
+    # failure here can't taint the already-committed post write. Skipped when no
+    # embedding key is configured, mirroring the startup sync in app.main.
+    if get_settings().google_api_key:
+        try:
+            async with SessionLocal() as reindex_session:
+                await sync_index(reindex_session)
+        except Exception:
+            logger.exception("RAG reindex after post upsert failed (post was saved)")
+
     return post
 
 
