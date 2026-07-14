@@ -24,6 +24,7 @@ export default function ChatWidget() {
   const [busy, setBusy] = useState(false);
   const [messages, setMessages] = useState<ChatMsg[]>([]);
   const msgsRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   // typewriter buffers
   const queueRef = useRef(""); // received-but-not-yet-shown text
@@ -64,6 +65,7 @@ export default function ChatWidget() {
     const history = [...messages, { role: "user" as const, content: text }];
     setMessages([...history, { role: "assistant", content: "" }]);
     setInput("");
+    if (inputRef.current) inputRef.current.style.height = "auto";
     setBusy(true);
 
     queueRef.current = "";
@@ -203,9 +205,22 @@ export default function ChatWidget() {
               send();
             }}
           >
-            <input
+            <textarea
+              ref={inputRef}
+              rows={1}
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => {
+                setInput(e.target.value);
+                const el = e.currentTarget;
+                el.style.height = "auto";
+                el.style.height = `${el.scrollHeight}px`;
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  send();
+                }
+              }}
               placeholder={t("Ask a question…", "輸入問題…")}
               disabled={busy}
             />
