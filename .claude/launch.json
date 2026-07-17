@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "frontend",
+      "cwd": "frontend",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 4100,
+      "env": {
+        "NEXT_PUBLIC_API_URL": "https://tsai-resume-api.onrender.com",
+        "NODE_USE_ENV_PROXY": "1",
+        "NO_PROXY": "localhost,127.0.0.1"
+      }
+    }
+  ]
+}

@@ -10,10 +10,26 @@ import type { ProjectCard } from "@/lib/api";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-function Pager({ current, total, base }: { current: number; total: number; base: string }) {
+function Pager({
+  current,
+  total,
+  base,
+  query,
+}: {
+  current: number;
+  total: number;
+  base: string;
+  /** Extra query params to preserve across page links (e.g. an active tag filter). */
+  query?: Record<string, string>;
+}) {
   const { lang } = useLang();
   const pages = Array.from({ length: total }, (_, i) => i + 1);
-  const href = (n: number) => (n === 1 ? base : `${base}?page=${n}`);
+  const href = (n: number) => {
+    const p = new URLSearchParams(query);
+    if (n > 1) p.set("page", String(n));
+    const qs = p.toString();
+    return qs ? `${base}?${qs}` : base;
+  };
   return (
     <div className="pager" role="navigation" aria-label={lang === "en" ? "Pagination" : "分頁"}>
       {current <= 1 ? (

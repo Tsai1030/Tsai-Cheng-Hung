@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { CSSProperties } from "react";
 import { useLang } from "./LangContext";
 import { Pager } from "./ProjectsView";
@@ -13,13 +14,19 @@ export default function BlogView({
   current,
   total,
   variant = "blog",
+  tags = [],
+  activeTag,
 }: {
   items: PostCard[];
   current: number;
   total: number;
   /** "blog" = main feed, "daily" = AI daily reports feed */
   variant?: "blog" | "daily";
+  /** Topic dropdown options (main feed only) */
+  tags?: string[];
+  activeTag?: string;
 }) {
+  const router = useRouter();
   const { lang } = useLang();
   const t = <T,>(en: T, zh: T) => (lang === "en" ? en : zh);
   const locale = lang === "en" ? "en-US" : "zh-TW";
@@ -59,6 +66,27 @@ export default function BlogView({
             {t("AI DAILY", "AI 日報")}
           </Link>
         </div>
+        {!isDaily && tags.length > 0 && (
+          <div className="bl-filter" data-reveal>
+            <label htmlFor="tag-filter">{t("TOPIC", "主題")}</label>
+            <select
+              id="tag-filter"
+              value={activeTag ?? ""}
+              onChange={(e) =>
+                router.push(
+                  e.target.value ? `/blog?tag=${encodeURIComponent(e.target.value)}` : "/blog"
+                )
+              }
+            >
+              <option value="">{t("All topics", "全部主題")}</option>
+              {tags.map((tag) => (
+                <option key={tag} value={tag}>
+                  {tag}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
 
       <div className="bl-feed">
@@ -102,7 +130,12 @@ export default function BlogView({
         })}
       </div>
 
-      <Pager current={current} total={total} base={base} />
+      <Pager
+        current={current}
+        total={total}
+        base={base}
+        query={activeTag ? { tag: activeTag } : undefined}
+      />
     </main>
   );
 }
