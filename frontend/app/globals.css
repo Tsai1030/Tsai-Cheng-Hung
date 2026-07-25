@@ -606,19 +606,23 @@ footer {
 .bl-tabs a:hover { color: var(--txt); border-color: var(--line2); }
 .bl-tabs a.active { color: var(--cy); border-color: var(--line2); background: rgba(60, 232, 255, 0.05); }
 
-.bl-filter { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+.bl-filter { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
 .bl-filter label {
   font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.22em; color: var(--dim);
 }
-.bl-filter select {
+.bl-filter select, .bl-filter input {
   font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em;
   padding: 8px 14px; border: 1px solid var(--line); border-radius: 0;
   color: var(--txt); background: transparent; cursor: pointer;
   transition: color 0.25s ease, border-color 0.25s ease;
 }
-.bl-filter select:hover { border-color: var(--line2); }
-.bl-filter select:focus { outline: none; border-color: var(--cy); }
+.bl-filter select:hover, .bl-filter input:hover { border-color: var(--line2); }
+.bl-filter select:focus, .bl-filter input:focus { outline: none; border-color: var(--cy); }
 .bl-filter select option { background: var(--bg1); color: var(--txt); }
+.bl-filter input { cursor: text; width: 230px; }
+.bl-filter input::placeholder { color: var(--faint); letter-spacing: 0.04em; }
+.bl-filter input::-webkit-search-cancel-button { filter: grayscale(1) opacity(0.5); cursor: pointer; }
+@media (max-width: 560px) { .bl-filter input { width: 100%; } }
 
 .bl-feed { display: grid; border-top: 1px dashed var(--line); }
 .bl-post {

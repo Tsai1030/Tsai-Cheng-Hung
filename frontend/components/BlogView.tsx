@@ -2,12 +2,24 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import type { CSSProperties } from "react";
 import { useLang } from "./LangContext";
 import { Pager } from "./ProjectsView";
 import LikeButton from "./LikeButton";
 import { EyeIcon } from "./icons";
 import type { PostCard } from "@/lib/api";
+
+// Filter links always drop `page`, so changing a filter lands back on page 1.
+function filterHref(tag: string | undefined, q: string) {
+  const p = new URLSearchParams();
+  if (tag) p.set("tag", tag);
+  if (q) p.set("q", q);
+  const qs = p.toString();
+  return qs ? `/blog?${qs}` : "/blog";
+}
+
+const SEARCH_DEBOUNCE_MS = 300;
 
 export default function BlogView({
   items,
@@ -16,6 +28,7 @@ export default function BlogView({
   variant = "blog",
   tags = [],
   activeTag,
+  activeQuery,
 }: {
   items: PostCard[];
   current: number;
@@ -25,6 +38,8 @@ export default function BlogView({
   /** Topic dropdown options (main feed only) */
   tags?: string[];
   activeTag?: string;
+  /** Current free-text search, echoed back from the URL (main feed only) */
+  activeQuery?: string;
 }) {
   const router = useRouter();
   const { lang } = useLang();
@@ -42,6 +57,16 @@ export default function BlogView({
 
   const isDaily = variant === "daily";
   const base = isDaily ? "/blog/daily" : "/blog";
+
+  const [draft, setDraft] = useState(activeQuery ?? "");
+  useEffect(() => {
+    if (draft.trim() === (activeQuery ?? "")) return;
+    const id = setTimeout(
+      () => router.replace(filterHref(activeTag, draft.trim()), { scroll: false }),
+      SEARCH_DEBOUNCE_MS
+    );
+    return () => clearTimeout(id);
+  }, [draft, activeQuery, activeTag, router]);
 
   return (
     <main className="page">
@@ -72,11 +97,7 @@ export default function BlogView({
             <select
               id="tag-filter"
               value={activeTag ?? ""}
-              onChange={(e) =>
-                router.push(
-                  e.target.value ? `/blog?tag=${encodeURIComponent(e.target.value)}` : "/blog"
-                )
-              }
+              onChange={(e) => router.push(filterHref(e.target.value || undefined, draft.trim()))}
             >
               <option value="">{t("All topics", "全部主題")}</option>
               {tags.map((tag) => (
@@ -85,6 +106,14 @@ export default function BlogView({
                 </option>
               ))}
             </select>
+            <label htmlFor="post-search">{t("SEARCH", "搜尋")}</label>
+            <input
+              id="post-search"
+              type="search"
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              placeholder={t("Title, excerpt, tag…", "標題、摘要、標籤…")}
+            />
           </div>
         )}
       </div>
@@ -134,7 +163,10 @@ export default function BlogView({
         current={current}
         total={total}
         base={base}
-        query={activeTag ? { tag: activeTag } : undefined}
+        query={{
+          ...(activeTag ? { tag: activeTag } : {}),
+          ...(activeQuery ? { q: activeQuery } : {}),
+        }}
       />
     </main>
   );

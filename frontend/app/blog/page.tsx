@@ -14,7 +14,7 @@ export const metadata = {
 export default async function BlogPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string; tag?: string }>;
+  searchParams: Promise<{ page?: string; tag?: string; q?: string }>;
 }) {
   const sp = await searchParams;
   const all = await getPosts({ excludeTag: DAILY_TAG });
@@ -28,7 +28,15 @@ export default async function BlogPage({
     .map(([name]) => name);
 
   const tag = sp.tag && counts.has(sp.tag) ? sp.tag : undefined;
-  const filtered = tag ? all.filter((p) => p.tags.includes(tag)) : all;
+  const query = sp.q?.trim() || undefined;
+  const needle = query?.toLowerCase();
+  const filtered = all.filter((p) => {
+    if (tag && !p.tags.includes(tag)) return false;
+    if (!needle) return true;
+    return [p.title_en, p.title_zh, p.excerpt_en, p.excerpt_zh, ...p.tags].some((field) =>
+      field.toLowerCase().includes(needle)
+    );
+  });
 
   const total = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   let page = Number.parseInt(sp.page ?? "1", 10);
@@ -41,7 +49,14 @@ export default async function BlogPage({
   return (
     <>
       <Header />
-      <BlogView items={items} current={page} total={total} tags={tags} activeTag={tag} />
+      <BlogView
+        items={items}
+        current={page}
+        total={total}
+        tags={tags}
+        activeTag={tag}
+        activeQuery={query}
+      />
     </>
   );
 }
