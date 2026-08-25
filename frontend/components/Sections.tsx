@@ -89,14 +89,23 @@ export function About() {
 
 const xp = [
   {
-    date: ["2026.06 — PRESENT", "2026.06 — 迄今"],
+    date: ["2026 — PRESENT", "2026 — 迄今"],
+    role: { en: "AI R&D Engineer", zh: "AI 研發工程師" },
+    org: "D-Link / 友訊科技股份有限公司",
+    desc: {
+      en: "Developing companion robots, focusing on the robot's LLM brain for natural dialogue, reasoning, and product-ready interaction.",
+      zh: "研發陪伴機器人，主要負責機器人大腦 LLM 的研發，讓對話理解、推理回應與互動體驗更自然且可落地。",
+    },
+    live: true,
+  },
+  {
+    date: ["2026.06 — 2026", "2026.06 — 2026"],
     role: { en: "AI Agent Engineer", zh: "AI Agent 工程師" },
     org: "YAGEO / 國巨股份有限公司",
     desc: {
       en: "Building MES AI agents — bringing autonomous agents into manufacturing execution and smart factory workflows.",
       zh: "打造 MES AI agent，將自主 Agent 導入製造執行系統與智慧工廠流程。",
     },
-    live: true,
   },
   {
     date: ["2026.04 — 2026.06", "2026.04 — 2026.06"],

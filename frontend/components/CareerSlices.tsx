@@ -67,12 +67,22 @@ const cards: Card[] = [
   },
   {
     img: "/YAGEO%20AI%20AGENT%20ENGINEER.png",
-    badge: { en: "Current", zh: "現職" },
+    badge: { en: "Experience", zh: "工作經歷" },
     role: { en: "AI Agent Engineer", zh: "AI Agent 工程師" },
     org: "國巨股份有限公司 / YAGEO",
     desc: {
       en: "Building MES AI agents — bringing autonomous agents into manufacturing execution & smart factory workflows.",
       zh: "打造 MES AI agent，將自主 Agent 導入製造執行系統與智慧工廠流程。",
+    },
+  },
+  {
+    img: "/d%20link.png",
+    badge: { en: "Current", zh: "現職" },
+    role: { en: "AI R&D Engineer", zh: "AI 研發工程師" },
+    org: "友訊科技股份有限公司 / D-Link",
+    desc: {
+      en: "Developing companion robots, focusing on the robot's LLM brain for natural dialogue, reasoning, and product-ready interaction.",
+      zh: "研發陪伴機器人，主要負責機器人大腦 LLM 的研發，讓對話理解、推理回應與互動體驗更自然且可落地。",
     },
   },
 ];
