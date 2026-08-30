@@ -89,7 +89,7 @@ export function About() {
 
 const xp = [
   {
-    date: ["2026 — PRESENT", "2026 — 迄今"],
+    date: ["2026.09 — PRESENT", "2026.09 — 迄今"],
     role: { en: "AI R&D Engineer", zh: "AI 研發工程師" },
     org: "D-Link / 友訊科技股份有限公司",
     desc: {
@@ -99,7 +99,7 @@ const xp = [
     live: true,
   },
   {
-    date: ["2026.06 — 2026", "2026.06 — 2026"],
+    date: ["2026.06 — 2026.08", "2026.06 — 2026.08"],
     role: { en: "AI Agent Engineer", zh: "AI Agent 工程師" },
     org: "YAGEO / 國巨股份有限公司",
     desc: {
